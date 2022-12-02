@@ -17,6 +17,7 @@ import {
 import { useHistory } from 'react-router-dom'
 
 // import { login } from '../reducers/loginReducer'
+import signupService from '../services/signup'
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -46,7 +47,7 @@ const Signup = () => {
   const history = useHistory()
   const classes = useStyles()
 
-  const handleSubmit = event => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
     if(event.target.password.value === event.target.password_confirm.value) {
       const userCredentials = {
@@ -54,6 +55,7 @@ const Signup = () => {
         password: event.target.password.value
       }
 
+      await signupService.signup(userCredentials)
       console.log(userCredentials, 'user creds brooooskis')
       history.push('/')
     }
