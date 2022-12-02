@@ -10,12 +10,11 @@ import {
   Typography,
 } from '@material-ui/core'
 
-import { Link } from 'react-router-dom'
-
 // import Alerts from './Alerts'
 
 // import { useDispatch } from 'react-redux'
 // import { Link, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 // import { login } from '../reducers/loginReducer'
 
@@ -44,20 +43,20 @@ const useStyles = makeStyles(theme => ({
 
 const Signup = () => {
   // const dispatch = useDispatch()
-  // const history = useHistory()
+  const history = useHistory()
   const classes = useStyles()
 
   const handleSubmit = event => {
     event.preventDefault()
-    console.log('handling submit....')
+    if(event.target.password.value === event.target.password_confirm.value) {
+      const userCredentials = {
+        username: event.target.username.value,
+        password: event.target.password.value
+      }
 
-    // const userCredentials = {
-    //   username: event.target.username.value,
-    //   password: event.target.password.value
-    // }
-
-    // dispatch(login(userCredentials))
-    // history.push('/')
+      console.log(userCredentials, 'user creds brooooskis')
+      history.push('/')
+    }
   }
 
   return (
@@ -110,9 +109,6 @@ const Signup = () => {
           </Button>
         </form>
         {/* {alerts && <Alerts alerts={alerts} />} */}
-        <Typography>
-          Don&apos;t have an account? Sign Up <Link to="/signup" className={classes.link}>Here</Link>
-        </Typography>
       </div>
     </Container>
   )
