@@ -96,10 +96,10 @@ const Login = ({ alerts }) => {
             Log In
           </Button>
         </form>
-        {alerts && <Alerts alerts={alerts} />}
         <Typography>
           Don&apos;t have an account? Sign Up <Link to="/signup" className={classes.link}>Here</Link>
         </Typography>
+        {alerts && <Alerts alerts={alerts} />}
       </div>
     </Container>
   )

@@ -12,11 +12,14 @@ import {
 
 // import Alerts from './Alerts'
 
-// import { useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 // import { Link, useHistory } from 'react-router-dom'
 import { useHistory } from 'react-router-dom'
 
 // import { login } from '../reducers/loginReducer'
+// import { signup } from '../reducers/signupReducer'
+import { setAlerts } from '../reducers/alertReducer'
+
 import signupService from '../services/signup'
 
 const useStyles = makeStyles(theme => ({
@@ -43,7 +46,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const Signup = () => {
-  // const dispatch = useDispatch()
+  const dispatch = useDispatch()
   const history = useHistory()
   const classes = useStyles()
 
@@ -55,9 +58,14 @@ const Signup = () => {
         password: event.target.password.value
       }
 
-      await signupService.signup(userCredentials)
-      console.log(userCredentials, 'user creds brooooskis')
-      history.push('/')
+      try {
+        await signupService.signup(userCredentials)
+        dispatch(setAlerts(['Sign Up was successful!'], 'success', 5))
+        history.push('/')
+      } catch(e) {
+        console.log(e)
+        dispatch(setAlerts(['Error with username or password'], 'error', 5))
+      }
     }
   }
 
