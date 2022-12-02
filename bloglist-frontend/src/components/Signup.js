@@ -10,12 +10,14 @@ import {
   Typography,
 } from '@material-ui/core'
 
-import Alerts from './Alerts'
+import { Link } from 'react-router-dom'
 
-import { useDispatch } from 'react-redux'
-import { Link, useHistory } from 'react-router-dom'
+// import Alerts from './Alerts'
 
-import { login } from '../reducers/loginReducer'
+// import { useDispatch } from 'react-redux'
+// import { Link, useHistory } from 'react-router-dom'
+
+// import { login } from '../reducers/loginReducer'
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -40,21 +42,22 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const Login = ({ alerts }) => {
-  const dispatch = useDispatch()
-  const history = useHistory()
+const Signup = () => {
+  // const dispatch = useDispatch()
+  // const history = useHistory()
   const classes = useStyles()
 
   const handleSubmit = event => {
     event.preventDefault()
+    console.log('handling submit....')
 
-    const userCredentials = {
-      username: event.target.username.value,
-      password: event.target.password.value
-    }
+    // const userCredentials = {
+    //   username: event.target.username.value,
+    //   password: event.target.password.value
+    // }
 
-    dispatch(login(userCredentials))
-    history.push('/')
+    // dispatch(login(userCredentials))
+    // history.push('/')
   }
 
   return (
@@ -64,7 +67,7 @@ const Login = ({ alerts }) => {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Log in to BlogList
+          Sign Up
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit}>
           <TextField
@@ -86,6 +89,16 @@ const Login = ({ alerts }) => {
             fullWidth
             autoFocus
           />
+          <TextField
+            label="Confirm Password"
+            type="password"
+            name="password_confirm"
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            autoFocus
+          />
           <Button
             type="submit"
             fullWidth
@@ -93,10 +106,10 @@ const Login = ({ alerts }) => {
             color="primary"
             className={classes.submit}
           >
-            Log In
+            Sign Up
           </Button>
         </form>
-        {alerts && <Alerts alerts={alerts} />}
+        {/* {alerts && <Alerts alerts={alerts} />} */}
         <Typography>
           Don&apos;t have an account? Sign Up <Link to="/signup" className={classes.link}>Here</Link>
         </Typography>
@@ -105,4 +118,4 @@ const Login = ({ alerts }) => {
   )
 }
 
-export default Login
+export default Signup
