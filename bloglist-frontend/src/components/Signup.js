@@ -14,7 +14,7 @@ import {
 
 import { useDispatch } from 'react-redux'
 // import { Link, useHistory } from 'react-router-dom'
-import { useHistory } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 // import { login } from '../reducers/loginReducer'
 // import { signup } from '../reducers/signupReducer'
@@ -118,6 +118,9 @@ const Signup = () => {
             Sign Up
           </Button>
         </form>
+        <Typography>
+          Have an account? Log In <Link to="/login" className={classes.link}>Here</Link>
+        </Typography>
         {/* {alerts && <Alerts alerts={alerts} />} */}
       </div>
     </Container>
