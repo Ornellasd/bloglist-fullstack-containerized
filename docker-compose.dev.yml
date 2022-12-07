@@ -21,8 +21,8 @@ services:
     ports:
       - 3001:3001
     environment:
-      - MONGODB_URI=mongodb://the_username:the_password@mongo:27017/bloglist_db
-      - SECRET="I Like Turtles"
+      - MONGODB_URI=mongodb://${MONGODB_USER}:${MONGODB_PASS}@mongo:27017/bloglist_db
+      - SECRET=${JWT_SECRET}
     container_name: bloglist-backend-dev
 
   mongo:
