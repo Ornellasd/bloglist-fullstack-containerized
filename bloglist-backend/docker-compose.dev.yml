@@ -11,7 +11,7 @@ services:
     ports:
       - 3001:3001
     environment:
-      - MONGODB_URI=mongodb://the_username:the_password@mongo:27017/bloglist_db
+      - MONGODB_URI=mongodb://the_username:the_password@mongo:27017/bloglist_dev
       - SECRET="I Like Turtles"
     container_name: bloglist-backend-dev
 
@@ -22,7 +22,7 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: password
-      MONGO_INITDB_DATABASE: bloglist_db
+      MONGO_INITDB_DATABASE: root_db
     volumes:
       - ./mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
       - mongo_data:/data/db
