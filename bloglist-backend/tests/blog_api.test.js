@@ -9,8 +9,6 @@ const User = require('../models/user')
 
 let token
 
-console.log(process.env, 'yeeeeeeeeeeeeeeeeet')
-
 beforeAll(async () => {
   await User.deleteMany({})
 
