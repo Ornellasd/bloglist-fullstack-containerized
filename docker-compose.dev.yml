@@ -21,7 +21,7 @@ services:
     ports:
       - 3001:3001
     environment:
-      - MONGODB_URI=mongodb://${MONGODB_USER}:${MONGODB_PASS}@mongo:27017/bloglist_db
+      - MONGODB_URI=mongodb://${MONGODB_USER}:${MONGODB_PASS}@mongo:27017/bloglist_dev
       - SECRET=${JWT_SECRET}
     container_name: bloglist-backend-dev
 
@@ -32,7 +32,7 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: password
-      MONGO_INITDB_DATABASE: bloglist_db
+      MONGO_INITDB_DATABASE: root_db
     volumes: 
       - ./bloglist-backend/mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
       - ./bloglist-backend/mongo_data:/data/db
@@ -46,7 +46,6 @@ services:
     container_name: reverse-proxy
     depends_on:
       - frontend
-      - backend
 volumes:
   mongo_data:
     

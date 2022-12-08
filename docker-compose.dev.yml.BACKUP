@@ -2,28 +2,30 @@ version: '3.8'
 
 services:
   frontend:
-    image: bloglist-frontend
+    image: bloglist-frontend-dev
     build:
       context: ./bloglist-frontend/
-      dockerfile: Dockerfile
+      dockerfile: dev.Dockerfile
     volumes:
       - ./bloglist-frontend/:/usr/src/app
     ports:
-      - 3000:80
-    container_name: bloglist-frontend
+      - 3000:3000
+    environment:
+      - REACT_APP_BACKEND_URL=http://backend:3001
+    container_name: bloglist-frontend-dev
   backend:
-    image: bloglist-backend
+    image: bloglist-backend-dev
     build:
       context: ./bloglist-backend/
-      dockerfile: Dockerfile
+      dockerfile: dev.Dockerfile
     volumes:
       - ./bloglist-backend/:/usr/src/app
     ports:
       - 3001:3001
     environment:
-      - MONGODB_URI=mongodb://${MONGODB_USER}:${MONGODB_PASS}@mongo:27017/bloglist_prod
-      - SECRET=${JWT_SECRET}
-    container_name: bloglist-backend
+      - MONGODB_URI=mongodb://the_username:the_password@mongo:27017/bloglist_db
+      - SECRET="I Like Turtles"
+    container_name: bloglist-backend-dev
 
   mongo:
     image: mongo
@@ -32,21 +34,21 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: password
-      MONGO_INITDB_DATABASE: root_db
+      MONGO_INITDB_DATABASE: bloglist_db
     volumes: 
-      - ./bloglist-backend/mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
-      - ./bloglist-backend/mongo_data:/data/db
+      - ./mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
+      - mongo_data:/data/db
     container_name: bloglist-db
+
   nginx:
     image: nginx:1.20.1
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
     ports:
-      - 8080:81
-    container_name: bloglist-reverse-proxy
+      - 8080:80
+    container_name: reverse-proxy
     depends_on:
       - frontend
-      - backend
 volumes:
   mongo_data:
     

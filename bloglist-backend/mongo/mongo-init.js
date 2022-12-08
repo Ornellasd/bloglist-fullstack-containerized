@@ -19,14 +19,3 @@ db.createUser(
 );
 db.createCollection('users');
 db.createCollection('blogs');
-
-db = db.getSiblingDB('bloglist_db');
-db.createUser(
-  {
-    user: 'the_username',
-    pwd: 'the_password',
-    roles: [{ role: 'readWrite', db: 'bloglist_testing' }],
-  },
-);
-db.createCollection('users');
-db.createCollection('blogs');
