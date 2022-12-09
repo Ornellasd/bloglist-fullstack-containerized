@@ -22,11 +22,12 @@ usersRouter.post('/', async (request, response) => {
   const passwordHash = await bcrypt.hash(body.password, saltRounds)
 
   const user = new User({
+    firstName: body.firstName,
+    lastName: body.lastName,
     username: body.username,
-    name: body.name,
     passwordHash
   })
-
+  
   const savedUser = await user.save()
 
   response.json(savedUser)

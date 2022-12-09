@@ -53,7 +53,7 @@ const Users = () => {
             {users.map(user =>
               <TableRow className={classes.userRow} component={Link} to={`/users/${user.id}`} key={user.id} hover>
                 <TableCell component="th" scope="row">
-                  {user.name}
+                  {user.firstName} {user.lastName}
                 </TableCell>
                 <TableCell align="right">{user.blogs.length}</TableCell>
               </TableRow>

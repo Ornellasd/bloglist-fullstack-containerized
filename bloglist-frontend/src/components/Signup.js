@@ -3,6 +3,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 
 import {
   Avatar,
+  Box,
   Button,
   Container,
   makeStyles,
@@ -37,6 +38,9 @@ const useStyles = makeStyles(theme => ({
     width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
+  nameField: {
+    width: '48%',
+  },
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
@@ -54,6 +58,8 @@ const Signup = () => {
     event.preventDefault()
     if(event.target.password.value === event.target.password_confirm.value) {
       const userCredentials = {
+        firstName: event.target.firstName.value,
+        lastName: event.target.lastName.value,
         username: event.target.username.value,
         password: event.target.password.value
       }
@@ -79,6 +85,26 @@ const Signup = () => {
           Sign Up
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit}>
+          <Box display="flex" justifyContent="space-between">
+            <TextField
+              label="First Name"
+              name="firstName"
+              variant="outlined"
+              margin="normal"
+              required
+              autoFocus
+              className={classes.nameField}
+            />
+            <TextField
+              label="Last Name"
+              name="lastName"
+              variant="outlined"
+              margin="normal"
+              required
+              autoFocus
+              className={classes.nameField}
+            />
+          </Box>
           <TextField
             label="Username"
             name="username"
