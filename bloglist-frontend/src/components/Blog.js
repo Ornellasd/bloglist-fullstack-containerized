@@ -102,7 +102,7 @@ const Blog = ({ loggedInUser, blogs }) => {
             {blog.title}
           </Typography>
           <Typography color="textSecondary" style={{ marginBottom: 12 }}>
-            added by {blog.user.name}
+            added by {blog.user.username}
           </Typography>
           <Typography component={Link} to={blog.url}>
             {blog.url}

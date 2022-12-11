@@ -27,7 +27,7 @@ const User = () => {
   return (
     <div>
       <Typography align="center" component="h1" variant="h5">
-        blogs added by {user.name}
+        blogs added by {user.username}
       </Typography>
       <List>
         {user.blogs.map((blog) =>
