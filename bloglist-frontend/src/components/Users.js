@@ -1,6 +1,6 @@
 import { React, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 
 import {
   makeStyles,
@@ -15,6 +15,7 @@ import {
 } from '@material-ui/core'
 
 import { getUsers } from '../reducers/usersReducer'
+import { useHistory } from 'react-router-dom'
 
 const useStyles = makeStyles(theme => ({
   tableHeading: {
@@ -34,7 +35,15 @@ const Users = () => {
     dispatch(getUsers())
   }, [dispatch])
 
+  const history = useHistory()
   const users = useSelector(state => state.users)
+
+  const handleRowClick = (e, user) => {
+    e.preventDefault()
+    if(user.blogs.length > 0) {
+      history.push(`/users/${user.id}`)
+    }
+  }
 
   return (
     <div>
@@ -51,9 +60,15 @@ const Users = () => {
           </TableHead>
           <TableBody>
             {users.map(user =>
-              <TableRow className={classes.userRow} component={Link} to={`/users/${user.id}`} key={user.id} hover>
+              <TableRow
+                className={classes.userRow}
+                style={ user.blogs.length > 0 ? { cursor: 'pointer' } : {} }
+                onClick={(e) => handleRowClick(e, user)}
+                hover={user.blogs.length > 0}
+                key={user.id}
+              >
                 <TableCell component="th" scope="row">
-                  {user.firstName} {user.lastName}
+                  {user.username}
                 </TableCell>
                 <TableCell align="right">{user.blogs.length}</TableCell>
               </TableRow>
