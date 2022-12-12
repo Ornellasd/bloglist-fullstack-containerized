@@ -28,26 +28,35 @@ const useStyles = makeStyles((theme) => ({
   title: {
     marginRight: theme.spacing(5),
   },
+  toolbar: {
+    justifyContent: 'space-between'
+  },
   navLinks: {
-    flexGrow: 1
+    flexGrow: 1,
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    }
   },
   drawerIcon: {
     display: 'none',
     [theme.breakpoints.down('sm')]: {
       display: 'block',
     },
-    [theme.breakpoints.up('md')]: {
-      display: 'none',
-    },
-    [theme.breakpoints.up('lg')]: {
-      display: 'none',
-    }
+    // [theme.breakpoints.up('md')]: {
+    //   display: 'none',
+    // },
+    // [theme.breakpoints.up('lg')]: {
+    //   display: 'none',
+    // }
   },
   userCorner: {
     flexGrow: 0.03,
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    }
   },
 }))
 
@@ -65,7 +74,7 @@ const Navbar = ({ currentUser, users }) => {
     ) {
       return
     }
-    setDrawerOpen(isDrawerOpen)
+    setDrawerOpen(!isDrawerOpen)
   }
 
   console.log(isDrawerOpen)
