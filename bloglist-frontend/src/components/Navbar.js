@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1
   },
   userCorner: {
-    flexGrow: 0.05,
+    flexGrow: 0.03,
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center'
@@ -50,9 +50,9 @@ const Navbar = ({ currentUser, users }) => {
             <Typography className={classes.userCornerItem}>
               Hello, {user && user.username}
             </Typography>
-            <Divider orientation="vertical" flexItem />
+            <Divider style={{ background: '#92C565' }} orientation="vertical" variant="middle" flexItem />
+            <Button color="inherit" component={Link} to={user && `/users/${user.id}`} >My Posts</Button>
             <Button color="inherit" onClick={() => dispatch(logout())}>Logout</Button>
-            <Button color="inherit" component={Link} to={user.id && `/users/${user.id}`} >My Posts</Button>
           </div>
         </Toolbar>
       </AppBar>
