@@ -1,6 +1,4 @@
-import { React, useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-// import { Link } from 'react-router-dom'
+import { React } from 'react'
 
 import {
   makeStyles,
@@ -14,7 +12,6 @@ import {
   Typography
 } from '@material-ui/core'
 
-import { getUsers } from '../reducers/usersReducer'
 import { useHistory } from 'react-router-dom'
 
 const useStyles = makeStyles(theme => ({
@@ -27,16 +24,9 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const Users = () => {
-  const dispatch = useDispatch()
+const Users = ({ users }) => {
   const classes = useStyles()
-
-  useEffect(() => {
-    dispatch(getUsers())
-  }, [dispatch])
-
   const history = useHistory()
-  const users = useSelector(state => state.users)
 
   const handleRowClick = (e, user) => {
     e.preventDefault()

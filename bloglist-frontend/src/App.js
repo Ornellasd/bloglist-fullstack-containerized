@@ -14,6 +14,7 @@ import {
 } from '@material-ui/core'
 
 import { getBlogs } from './reducers/blogReducer'
+import { getUsers } from './reducers/usersReducer'
 import { initializeUser } from './reducers/loginReducer'
 
 import blogService from './services/blogs'
@@ -33,9 +34,11 @@ const App = () => {
   const alerts = useSelector(state => state.alerts)
   const blogs = useSelector(state => state.blogs)
   const loggedInUser = useSelector(state => state.login)
+  const users = useSelector(state => state.users)
 
   useEffect(() => {
     dispatch(getBlogs())
+    dispatch(getUsers())
   }, [dispatch])
 
   useEffect(() => {
@@ -53,7 +56,7 @@ const App = () => {
       <Router>
         {loggedInUser &&
           <div>
-            <Navbar user={loggedInUser} />
+            <Navbar currentUser={loggedInUser} blogs={blogs} users={users} />
             <Alerts alerts={alerts} />
           </div>
         }
@@ -63,7 +66,7 @@ const App = () => {
             {loggedInUser ? <User /> : <Redirect to="/login" />}
           </Route>
           <Route path="/users">
-            {loggedInUser ? <Users /> : <Redirect to="/login" />}
+            {loggedInUser ? <Users users={users} /> : <Redirect to="/login" />}
           </Route>
           <Route path="/blogs/:id">
             {loggedInUser ? <Blog loggedInUser={loggedInUser} blogs={blogs} /> : <Redirect to="/login" />}
