@@ -1,10 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-
-import { AppBar, Button, Divider, Toolbar, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
+
+import {
+  AppBar,
+  Button,
+  IconButton,
+  Divider,
+  Toolbar,
+  Typography
+} from '@material-ui/core'
+
+import { Menu } from '@material-ui/icons'
 
 import { logout } from '../reducers/loginReducer'
 
@@ -22,18 +31,44 @@ const useStyles = makeStyles((theme) => ({
   navLinks: {
     flexGrow: 1
   },
+  drawerIcon: {
+    display: 'none',
+    [theme.breakpoints.down('sm')]: {
+      display: 'block',
+    },
+    [theme.breakpoints.up('md')]: {
+      display: 'none',
+    },
+    [theme.breakpoints.up('lg')]: {
+      display: 'none',
+    }
+  },
   userCorner: {
     flexGrow: 0.03,
     display: 'flex',
     justifyContent: 'space-between',
-    alignItems: 'center'
+    alignItems: 'center',
   },
 }))
 
 const Navbar = ({ currentUser, users }) => {
   const dispatch = useDispatch()
   const classes = useStyles()
+
+  const [isDrawerOpen, setDrawerOpen] = useState(false)
   const user = users.find(u => u.username === currentUser.username)
+
+  const toggleDrawer = (event, isDrawerOpen) => {
+    if(
+      event.type === 'keydown' &&
+      (event.key === 'Tab' || event.key === 'Shift')
+    ) {
+      return
+    }
+    setDrawerOpen(isDrawerOpen)
+  }
+
+  console.log(isDrawerOpen)
 
   return (
     <div className={classes.root}>
@@ -46,6 +81,14 @@ const Navbar = ({ currentUser, users }) => {
             <Button color="inherit" component={Link} to="/blogs">Blogs</Button>
             <Button color="inherit" component={Link} to="/users">Users</Button>
           </div>
+          <IconButton
+            className={classes.drawerIcon}
+            onClick={toggleDrawer}
+            // breakpoints.down(breakpoint | number)
+
+          >
+            <Menu style={{ color: '#92C565' }} />
+          </IconButton>
           <div className={classes.userCorner}>
             <Typography className={classes.userCornerItem}>
               Hello, {user && user.username}
