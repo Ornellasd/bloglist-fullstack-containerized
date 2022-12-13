@@ -54,12 +54,10 @@ const App = () => {
     <Container component="main" maxWidth="md">
       <CssBaseline />
       <Router>
-        {loggedInUser &&
-          <div>
-            <Navbar currentUser={loggedInUser} blogs={blogs} users={users} />
-            <Alerts alerts={alerts} />
-          </div>
-        }
+        <div>
+          <Navbar currentUser={loggedInUser} blogs={blogs} users={users} />
+          <Alerts alerts={alerts} />
+        </div>
 
         <Switch>
           <Route path="/users/:id">

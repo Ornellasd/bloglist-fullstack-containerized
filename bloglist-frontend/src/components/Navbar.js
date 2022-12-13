@@ -132,7 +132,7 @@ const MenuDrawer = () => {
 const Navbar = ({ currentUser, users }) => {
   const dispatch = useDispatch()
   const classes = useStyles()
-  const user = users.find(u => u.username === currentUser.username)
+  const user = currentUser && users.find(u => u.username === currentUser.username)
 
   return (
     <div className={classes.root}>
@@ -141,21 +141,25 @@ const Navbar = ({ currentUser, users }) => {
           <Typography variant="h6" className={classes.title}>
             Blog App
           </Typography>
-          <div className={classes.navLinks}>
-            <Button color="inherit" component={Link} to="/blogs">Blogs</Button>
-            <Button color="inherit" component={Link} to="/users">Users</Button>
-          </div>
+          {currentUser &&
+            <>
+              <div className={classes.navLinks}>
+                <Button color="inherit" component={Link} to="/blogs">Blogs</Button>
+                <Button color="inherit" component={Link} to="/users">Users</Button>
+              </div>
 
-          <MenuDrawer />
+              <MenuDrawer />
 
-          <div className={classes.userCorner}>
-            <Typography className={classes.userCornerItem}>
-              Hello, {user && user.username}
-            </Typography>
-            <Divider style={{ background: '#92C565' }} orientation="vertical" variant="middle" flexItem />
-            <Button color="inherit" component={Link}  to={user && `/users/${user.id}`} >My Posts</Button>
-            <Button color="inherit" onClick={() => dispatch(logout())}>Logout</Button>
-          </div>
+              <div className={classes.userCorner}>
+                <Typography className={classes.userCornerItem}>
+                  Hello, {user && user.username}
+                </Typography>
+                <Divider style={{ background: '#92C565' }} orientation="vertical" variant="middle" flexItem />
+                <Button color="inherit" component={Link}  to={user && `/users/${user.id}`} >My Posts</Button>
+                <Button color="inherit" onClick={() => dispatch(logout())}>Logout</Button>
+              </div>
+            </>
+          }
         </Toolbar>
       </AppBar>
       <Toolbar />
