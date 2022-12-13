@@ -10,13 +10,16 @@ import {
   IconButton,
   Divider,
   Toolbar,
-  Typography
+  Typography,
+  SwipeableDrawer,
+  Box,
 } from '@material-ui/core'
 
-import { Menu } from '@material-ui/icons'
+import { Close, Menu } from '@material-ui/icons'
 
 import { logout } from '../reducers/loginReducer'
 
+// breakout theme!
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -61,23 +64,20 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const Navbar = ({ currentUser, users }) => {
+  const [isDrawerOpen, setDrawerOpen] = useState(false)
   const dispatch = useDispatch()
   const classes = useStyles()
-
-  const [isDrawerOpen, setDrawerOpen] = useState(false)
   const user = users.find(u => u.username === currentUser.username)
 
-  const toggleDrawer = (event, isDrawerOpen) => {
+  const toggleDrawer = (event, open) => {
     if(
-      event.type === 'keydown' &&
+      event && event.type === 'keydown' &&
       (event.key === 'Tab' || event.key === 'Shift')
     ) {
       return
     }
-    setDrawerOpen(!isDrawerOpen)
+    setDrawerOpen(open)
   }
-
-  console.log(isDrawerOpen)
 
   return (
     <div className={classes.root}>
@@ -92,18 +92,46 @@ const Navbar = ({ currentUser, users }) => {
           </div>
           <IconButton
             className={classes.drawerIcon}
-            onClick={toggleDrawer}
-            // breakpoints.down(breakpoint | number)
-
+            onClick={(e) => toggleDrawer(e, true)}
           >
             <Menu style={{ color: '#92C565' }} />
           </IconButton>
+
+          <SwipeableDrawer
+            anchor="top"
+            open={isDrawerOpen}
+            onClose={(e) => toggleDrawer(e, false)}
+            onOpen={(e) => toggleDrawer(e, true)}
+          >
+            <Box
+              // className={classes.navbar}
+              // style={{
+              //   backgroundColor: 'green'
+              // }}
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                backgroundColor: '#689f38',
+                alignItems: 'center',
+                paddingLeft: '24px',
+                paddingRight: '24px',
+              }}
+            >
+              <div>derp</div>
+              <IconButton
+                onClick={(e) => toggleDrawer(e, false)}
+              >
+                <Close />
+              </IconButton>
+            </Box>
+          </SwipeableDrawer>
+
           <div className={classes.userCorner}>
             <Typography className={classes.userCornerItem}>
               Hello, {user && user.username}
             </Typography>
             <Divider style={{ background: '#92C565' }} orientation="vertical" variant="middle" flexItem />
-            <Button color="inherit" component={Link} to={user && `/users/${user.id}`} >My Posts</Button>
+            <Button color="inherit" component={Link}  to={user && `/users/${user.id}`} >My Posts</Button>
             <Button color="inherit" onClick={() => dispatch(logout())}>Logout</Button>
           </div>
         </Toolbar>
