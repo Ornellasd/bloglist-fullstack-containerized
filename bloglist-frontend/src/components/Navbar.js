@@ -95,20 +95,15 @@ const MenuDrawer = () => {
         <Box
           style={{
             display: 'inherit',
-            // justifyContent: 'end',
             backgroundColor: '#689f38',
             flexDirection: 'column',
-            // alignItems: 'center',
             paddingLeft: '16px',
             paddingRight: '16px',
-            height: '100%'
           }}
         >
           <Box style={{
             display: 'inherit',
             justifyContent: 'flex-end',
-            // paddingLeft: '16px',
-            // paddingRight: '16px',
           }}>
             <IconButton
               onClick={(e) => toggleDrawer(e, false)}
@@ -120,13 +115,13 @@ const MenuDrawer = () => {
           <Divider />
           <Box
             style={{
-              // display: 'inherit',
-              flexDirection: 'column'
+              display: 'inherit',
+              flexDirection: 'column',
+              alignItems: 'center',
             }}
           >
-            <Typography>Test Item 1</Typography>
-            <Typography>Test Item 2</Typography>
-
+            <Typography component={Link} to="/blogs" onClick={(e) => toggleDrawer(e, false)}>Blogs</Typography>
+            <Typography component={Link} to="/users" onClick={(e) => toggleDrawer(e, false)}>Users</Typography>
           </Box>
         </Box>
       </SwipeableDrawer>
