@@ -63,11 +63,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const Navbar = ({ currentUser, users }) => {
+const MenuDrawer = () => {
   const [isDrawerOpen, setDrawerOpen] = useState(false)
-  const dispatch = useDispatch()
   const classes = useStyles()
-  const user = users.find(u => u.username === currentUser.username)
 
   const toggleDrawer = (event, open) => {
     if(
@@ -80,6 +78,68 @@ const Navbar = ({ currentUser, users }) => {
   }
 
   return (
+    <Box>
+      <IconButton
+        className={classes.drawerIcon}
+        onClick={(e) => toggleDrawer(e, true)}
+      >
+        <Menu style={{ color: '#92C565' }} />
+      </IconButton>
+
+      <SwipeableDrawer
+        anchor="top"
+        open={isDrawerOpen}
+        onClose={(e) => toggleDrawer(e, false)}
+        onOpen={(e) => toggleDrawer(e, true)}
+      >
+        <Box
+          style={{
+            display: 'inherit',
+            // justifyContent: 'end',
+            backgroundColor: '#689f38',
+            flexDirection: 'column',
+            // alignItems: 'center',
+            paddingLeft: '16px',
+            paddingRight: '16px',
+            height: '100%'
+          }}
+        >
+          <Box style={{
+            display: 'inherit',
+            justifyContent: 'flex-end',
+            // paddingLeft: '16px',
+            // paddingRight: '16px',
+          }}>
+            <IconButton
+              onClick={(e) => toggleDrawer(e, false)}
+            >
+              <Close />
+            </IconButton>
+          </Box>
+
+          <Divider />
+          <Box
+            style={{
+              // display: 'inherit',
+              flexDirection: 'column'
+            }}
+          >
+            <Typography>Test Item 1</Typography>
+            <Typography>Test Item 2</Typography>
+
+          </Box>
+        </Box>
+      </SwipeableDrawer>
+    </Box>
+  )
+}
+
+const Navbar = ({ currentUser, users }) => {
+  const dispatch = useDispatch()
+  const classes = useStyles()
+  const user = users.find(u => u.username === currentUser.username)
+
+  return (
     <div className={classes.root}>
       <AppBar className={classes.navbar}>
         <Toolbar className={classes.toolbar}>
@@ -90,57 +150,8 @@ const Navbar = ({ currentUser, users }) => {
             <Button color="inherit" component={Link} to="/blogs">Blogs</Button>
             <Button color="inherit" component={Link} to="/users">Users</Button>
           </div>
-          <IconButton
-            className={classes.drawerIcon}
-            onClick={(e) => toggleDrawer(e, true)}
-          >
-            <Menu style={{ color: '#92C565' }} />
-          </IconButton>
 
-          <SwipeableDrawer
-            anchor="top"
-            open={isDrawerOpen}
-            onClose={(e) => toggleDrawer(e, false)}
-            onOpen={(e) => toggleDrawer(e, true)}
-          >
-            <Box
-              style={{
-                display: 'inherit',
-                // justifyContent: 'end',
-                backgroundColor: '#689f38',
-                flexDirection: 'column',
-                // alignItems: 'center',
-                paddingLeft: '16px',
-                paddingRight: '16px',
-                height: '100%'
-              }}
-            >
-              <Box style={{
-                display: 'inherit',
-                justifyContent: 'flex-end',
-                // paddingLeft: '16px',
-                // paddingRight: '16px',
-              }}>
-                <IconButton
-                  onClick={(e) => toggleDrawer(e, false)}
-                >
-                  <Close />
-                </IconButton>
-              </Box>
-
-              <Divider />
-              <Box
-                style={{
-                  // display: 'inherit',
-                  flexDirection: 'column'
-                }}
-              >
-                <Typography>Test Item 1</Typography>
-                <Typography>Test Item 2</Typography>
-
-              </Box>
-            </Box>
-          </SwipeableDrawer>
+          <MenuDrawer />
 
           <div className={classes.userCorner}>
             <Typography className={classes.userCornerItem}>
