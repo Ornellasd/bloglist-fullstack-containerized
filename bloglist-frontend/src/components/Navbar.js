@@ -104,25 +104,41 @@ const Navbar = ({ currentUser, users }) => {
             onOpen={(e) => toggleDrawer(e, true)}
           >
             <Box
-              // className={classes.navbar}
-              // style={{
-              //   backgroundColor: 'green'
-              // }}
               style={{
-                display: 'flex',
-                justifyContent: 'space-between',
+                display: 'inherit',
+                // justifyContent: 'end',
                 backgroundColor: '#689f38',
-                alignItems: 'center',
-                paddingLeft: '24px',
-                paddingRight: '24px',
+                flexDirection: 'column',
+                // alignItems: 'center',
+                paddingLeft: '16px',
+                paddingRight: '16px',
+                height: '100%'
               }}
             >
-              <div>derp</div>
-              <IconButton
-                onClick={(e) => toggleDrawer(e, false)}
+              <Box style={{
+                display: 'inherit',
+                justifyContent: 'flex-end',
+                // paddingLeft: '16px',
+                // paddingRight: '16px',
+              }}>
+                <IconButton
+                  onClick={(e) => toggleDrawer(e, false)}
+                >
+                  <Close />
+                </IconButton>
+              </Box>
+
+              <Divider />
+              <Box
+                style={{
+                  // display: 'inherit',
+                  flexDirection: 'column'
+                }}
               >
-                <Close />
-              </IconButton>
+                <Typography>Test Item 1</Typography>
+                <Typography>Test Item 2</Typography>
+
+              </Box>
             </Box>
           </SwipeableDrawer>
 
