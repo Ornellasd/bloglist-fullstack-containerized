@@ -35,6 +35,8 @@ const Users = ({ users }) => {
     }
   }
 
+  const sortedUsers = users.sort((a, b) => b.blogs.length - a.blogs.length)
+
   return (
     <div>
       <Typography align="center" component="h1" variant="h5">
@@ -49,7 +51,7 @@ const Users = ({ users }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {users.map(user =>
+            {sortedUsers.map(user =>
               <TableRow
                 className={classes.userRow}
                 style={ user.blogs.length > 0 ? { cursor: 'pointer' } : {} }
