@@ -11,11 +11,14 @@ import {
   Divider,
   Toolbar,
   Typography,
-  SwipeableDrawer,
-  Box,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
 } from '@material-ui/core'
 
-import { Close, Menu } from '@material-ui/icons'
+// import { Close, Menu } from '@material-ui/icons'
+import { Menu } from '@material-ui/icons'
 
 import { logout } from '../reducers/loginReducer'
 
@@ -61,6 +64,9 @@ const useStyles = makeStyles((theme) => ({
       display: 'none',
     }
   },
+  list: {
+    width: 300,
+  }
 }))
 
 const MenuDrawer = () => {
@@ -78,54 +84,47 @@ const MenuDrawer = () => {
   }
 
   return (
-    <Box>
+    <>
       <IconButton
         className={classes.drawerIcon}
         onClick={(e) => toggleDrawer(e, true)}
+        edge="end"
       >
         <Menu style={{ color: '#92C565' }} />
       </IconButton>
 
-      <SwipeableDrawer
-        anchor="top"
+      <Drawer
+        anchor="right"
         open={isDrawerOpen}
         onClose={(e) => toggleDrawer(e, false)}
         onOpen={(e) => toggleDrawer(e, true)}
       >
-        <Box
-          style={{
-            display: 'inherit',
-            backgroundColor: '#689f38',
-            flexDirection: 'column',
-            paddingLeft: '16px',
-            paddingRight: '16px',
-          }}
+        <div
+          role="presentation"
+          className={classes.list}
         >
-          <Box style={{
-            display: 'inherit',
-            justifyContent: 'flex-end',
-          }}>
-            <IconButton
-              onClick={(e) => toggleDrawer(e, false)}
-            >
-              <Close />
-            </IconButton>
-          </Box>
-
-          <Divider />
-          <Box
+          <List
             style={{
-              display: 'inherit',
-              flexDirection: 'column',
-              alignItems: 'center',
-            }}
-          >
-            <Typography component={Link} to="/blogs" onClick={(e) => toggleDrawer(e, false)}>Blogs</Typography>
-            <Typography component={Link} to="/users" onClick={(e) => toggleDrawer(e, false)}>Users</Typography>
-          </Box>
-        </Box>
-      </SwipeableDrawer>
-    </Box>
+              backgroundColor: '#689f38',
+            }}>
+            <ListItem>
+              CLOSE
+            </ListItem>
+            <Divider />
+            <ListItem>
+              <ListItemText primary="Blogs" />
+            </ListItem>
+            <ListItem>
+              <ListItemText primary="Users" />
+            </ListItem>
+            <Divider />
+            <ListItem>
+              <ListItemText primary="Log Out" />
+            </ListItem>
+          </List>
+        </div>
+      </Drawer>
+    </>
   )
 }
 
