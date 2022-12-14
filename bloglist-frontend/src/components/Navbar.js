@@ -15,10 +15,12 @@ import {
   List,
   ListItem,
   ListItemText,
+  // ListItemIcon
 } from '@material-ui/core'
 
+
 // import { Close, Menu } from '@material-ui/icons'
-import { Menu } from '@material-ui/icons'
+import { Close, Menu } from '@material-ui/icons'
 
 import { logout } from '../reducers/loginReducer'
 
@@ -55,6 +57,10 @@ const useStyles = makeStyles((theme) => ({
     //   display: 'none',
     // }
   },
+  drawerLink: {
+    textDecoration: 'none',
+    color: '#fff',
+  },
   userCorner: {
     flexGrow: 0.03,
     display: 'flex',
@@ -68,6 +74,20 @@ const useStyles = makeStyles((theme) => ({
     width: 300,
   }
 }))
+
+const ListItemLink = ({ text, href, ...props }) => {
+  const classes = useStyles()
+
+  return (
+    <ListItem component={Link} to={href} {...props} className={classes.drawerLink}>
+      <ListItemText>
+        <Typography variant="h6">
+          {text}
+        </Typography>
+      </ListItemText>
+    </ListItem>
+  )
+}
 
 const MenuDrawer = () => {
   const [isDrawerOpen, setDrawerOpen] = useState(false)
@@ -107,20 +127,19 @@ const MenuDrawer = () => {
             style={{
               backgroundColor: '#689f38',
             }}>
-            <ListItem>
-              CLOSE
+            <ListItem style={{ justifyContent: 'flex-end' }}>
+              <IconButton
+                onClick={(e) => toggleDrawer(e, false)}
+                edge="end"
+              >
+                <Close style={{ color: '#92C565' }} />
+              </IconButton>
             </ListItem>
             <Divider />
-            <ListItem>
-              <ListItemText primary="Blogs" />
-            </ListItem>
-            <ListItem>
-              <ListItemText primary="Users" />
-            </ListItem>
+            <ListItemLink text="Blogs" href="/blogs" />
+            <ListItemLink text="Users" href="/users" />
             <Divider />
-            <ListItem>
-              <ListItemText primary="Log Out" />
-            </ListItem>
+            <ListItemLink text="Log Out" href="http://www.google.com" />
           </List>
         </div>
       </Drawer>
