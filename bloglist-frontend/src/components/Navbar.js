@@ -68,7 +68,9 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   list: {
+    height: '100%',
     width: 300,
+    backgroundColor: '#689f38',
   },
 }))
 
@@ -127,10 +129,10 @@ const MenuDrawer = () => {
           role="presentation"
           className={classes.list}
         >
-          <List
-            style={{
+          <List>
+            {/* style={{
               backgroundColor: '#689f38',
-            }}>
+            }}> */}
             <ListItem style={{ justifyContent: 'flex-end' }}>
               <IconButton
                 onClick={(e) => toggleDrawer(e, false)}
