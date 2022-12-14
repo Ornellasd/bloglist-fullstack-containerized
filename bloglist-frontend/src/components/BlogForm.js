@@ -9,11 +9,15 @@ import {
   DialogContent,
   DialogTitle,
   DialogActions,
-  TextField
+  TextField,
+  useMediaQuery,
+  useTheme
 } from '@material-ui/core'
 
 const BlogForm = ({ dialogOpen, handleDialogClose }) => {
   const dispatch = useDispatch()
+  const theme = useTheme()
+  const fullScreen = useMediaQuery(theme.breakpoints.down('sm'))
 
   const handleSubmit = event => {
     event.preventDefault()
@@ -36,6 +40,7 @@ const BlogForm = ({ dialogOpen, handleDialogClose }) => {
     <Dialog
       open={dialogOpen}
       onClose={handleDialogClose}
+      fullScreen={fullScreen}
     >
       <DialogTitle>Create New Blog</DialogTitle>
       <form onSubmit={handleSubmit} autoComplete="off">
