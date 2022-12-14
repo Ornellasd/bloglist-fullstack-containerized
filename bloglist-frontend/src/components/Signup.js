@@ -25,10 +25,12 @@ import signupService from '../services/signup'
 
 const useStyles = makeStyles(theme => ({
   paper: {
-    marginTop: theme.spacing(2),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    [theme.breakpoints.down('sm')]: {
+      marginTop: theme.spacing(1)
+    }
   },
   avatar: {
     margin: theme.spacing(1),
