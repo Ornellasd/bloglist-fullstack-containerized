@@ -15,11 +15,8 @@ import {
   List,
   ListItem,
   ListItemText,
-  // ListItemIcon
 } from '@material-ui/core'
 
-
-// import { Close, Menu } from '@material-ui/icons'
 import { Close, Menu } from '@material-ui/icons'
 
 import { logout } from '../reducers/loginReducer'
@@ -72,16 +69,21 @@ const useStyles = makeStyles((theme) => ({
   },
   list: {
     width: 300,
-  }
+  },
 }))
 
 const ListItemLink = ({ text, href, ...props }) => {
   const classes = useStyles()
 
   return (
-    <ListItem component={Link} to={href} {...props} className={classes.drawerLink}>
+    <ListItem
+      className={classes.drawerLink}
+      component={Link}
+      to={href}
+      {...props}
+    >
       <ListItemText>
-        <Typography variant="h6">
+        <Typography>
           {text}
         </Typography>
       </ListItemText>
@@ -90,8 +92,10 @@ const ListItemLink = ({ text, href, ...props }) => {
 }
 
 const MenuDrawer = () => {
-  const [isDrawerOpen, setDrawerOpen] = useState(false)
   const classes = useStyles()
+  const dispatch = useDispatch()
+
+  const [isDrawerOpen, setDrawerOpen] = useState(false)
 
   const toggleDrawer = (event, open) => {
     if(
@@ -136,10 +140,10 @@ const MenuDrawer = () => {
               </IconButton>
             </ListItem>
             <Divider />
-            <ListItemLink text="Blogs" href="/blogs" />
-            <ListItemLink text="Users" href="/users" />
+            <ListItemLink text="Blogs" href="/blogs" onClick={(e) => toggleDrawer(e, false)} />
+            <ListItemLink text="Users" href="/users" onClick={(e) => toggleDrawer(e, false)} />
             <Divider />
-            <ListItemLink text="Log Out" href="http://www.google.com" />
+            <ListItemLink text="Log Out" onClick={() => dispatch(logout())} />
           </List>
         </div>
       </Drawer>
