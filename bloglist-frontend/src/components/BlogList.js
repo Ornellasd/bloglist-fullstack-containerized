@@ -10,6 +10,7 @@ import {
   ListItem,
   ListItemText,
   makeStyles,
+  Typography,
 } from '@material-ui/core'
 
 import AddIcon from '@material-ui/icons/Add'
@@ -55,7 +56,11 @@ const BlogList = ({ blogs }) => {
           <>
             <ListItem component={Link} to={`/blogs/${blog.id}`} key={blog.id} button>
               <ListItemText primary={blog.title} secondary={`by ${blog.user.username}`} />
-              <ListItemText className={classes.listItemDate}>{formatDate(blog.postedAt)}</ListItemText>
+              <ListItemText className={classes.listItemDate}>
+                <Typography variant="caption">
+                  {formatDate(blog.postedAt)}
+                </Typography>
+              </ListItemText>
             </ListItem>
             <Divider />
           </>
