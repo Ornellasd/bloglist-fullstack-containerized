@@ -98,6 +98,7 @@ const MenuDrawer = () => {
   const dispatch = useDispatch()
 
   const [isDrawerOpen, setDrawerOpen] = useState(false)
+  const [selectedIndex, setSelectedIndex] = useState(0)
 
   const toggleDrawer = (event, open) => {
     if(
@@ -107,6 +108,11 @@ const MenuDrawer = () => {
       return
     }
     setDrawerOpen(open)
+  }
+
+  const handleListItemClick = (event, index) => {
+    toggleDrawer(event, false)
+    setSelectedIndex(index)
   }
 
   return (
@@ -130,9 +136,6 @@ const MenuDrawer = () => {
           className={classes.list}
         >
           <List>
-            {/* style={{
-              backgroundColor: '#689f38',
-            }}> */}
             <ListItem style={{ justifyContent: 'flex-end' }}>
               <IconButton
                 onClick={(e) => toggleDrawer(e, false)}
@@ -142,8 +145,8 @@ const MenuDrawer = () => {
               </IconButton>
             </ListItem>
             <Divider />
-            <ListItemLink text="Blogs" href="/blogs" onClick={(e) => toggleDrawer(e, false)} />
-            <ListItemLink text="Users" href="/users" onClick={(e) => toggleDrawer(e, false)} />
+            <ListItemLink text="Blogs" href="/blogs" onClick={(e) => handleListItemClick(e, 0)} selected={selectedIndex === 0} />
+            <ListItemLink text="Users" href="/users" onClick={(e) => handleListItemClick(e, 1)} selected={selectedIndex === 1} />
             <Divider />
             <ListItemLink text="Log Out" onClick={() => dispatch(logout())} />
           </List>
