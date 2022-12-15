@@ -17,9 +17,10 @@ const blogSchema = new mongoose.Schema({
     minLength: 4
   },
   likes: Number,
-  posted_at: {
+  postedAt: {
     type: Date,
-    default: Date.now
+    default: Date.now,
+    required: true,
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,

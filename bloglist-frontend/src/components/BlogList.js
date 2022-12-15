@@ -42,6 +42,11 @@ const BlogList = ({ blogs }) => {
     setDialogOpen(false)
   }
 
+  const formatDate = rawDate => {
+    const date = new Date(rawDate)
+    return date.toLocaleDateString()
+  }
+
   return (
     <>
       <BlogForm dialogOpen={dialogOpen} handleDialogClose={handleDialogClose} />
@@ -50,7 +55,7 @@ const BlogList = ({ blogs }) => {
           <>
             <ListItem component={Link} to={`/blogs/${blog.id}`} key={blog.id} button>
               <ListItemText primary={blog.title} secondary={`by ${blog.user.username}`} />
-              <ListItemText className={classes.listItemDate}>12/18/2022</ListItemText>
+              <ListItemText className={classes.listItemDate}>{formatDate(blog.postedAt)}</ListItemText>
             </ListItem>
             <Divider />
           </>
