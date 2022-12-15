@@ -8,8 +8,8 @@ import {
   Fab,
   List,
   ListItem,
+  ListItemText,
   makeStyles,
-  Typography
 } from '@material-ui/core'
 
 import AddIcon from '@material-ui/icons/Add'
@@ -17,13 +17,6 @@ import AddIcon from '@material-ui/icons/Add'
 import BlogForm from '../components/BlogForm'
 
 const useStyles = makeStyles(() => ({
-  link: {
-    textDecoration: 'none',
-    color: '#000000'
-  },
-  // article: {
-  //   lineHeight: 1.35
-  // },
   addButton: {
     right: 20,
     bottom: 20,
@@ -50,14 +43,12 @@ const BlogList = ({ blogs }) => {
       <BlogForm dialogOpen={dialogOpen} handleDialogClose={handleDialogClose} />
       <List>
         {blogs.map(blog =>
-          <Link to={`/blogs/${blog.id}`} className={classes.link} key={blog.id}>
-            <ListItem button>
-              <Typography variant="h6">
-                {blog.title}
-              </Typography>
+          <>
+            <ListItem component={Link} to={`/blogs/${blog.id}`} key={blog.id} button>
+              <ListItemText primary={blog.title} secondary={`by ${blog.user.username}`} />
             </ListItem>
             <Divider />
-          </Link>
+          </>
         )}
       </List>
       <Fab size="medium" color="primary" className={classes.addButton} onClick={handleDialogOpen}>
