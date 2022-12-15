@@ -21,7 +21,11 @@ const useStyles = makeStyles(() => ({
     right: 20,
     bottom: 20,
     position: 'fixed'
-  }
+  },
+  listItemDate: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+  },
 }))
 
 
@@ -46,6 +50,7 @@ const BlogList = ({ blogs }) => {
           <>
             <ListItem component={Link} to={`/blogs/${blog.id}`} key={blog.id} button>
               <ListItemText primary={blog.title} secondary={`by ${blog.user.username}`} />
+              <ListItemText className={classes.listItemDate}>12/18/2022</ListItemText>
             </ListItem>
             <Divider />
           </>
