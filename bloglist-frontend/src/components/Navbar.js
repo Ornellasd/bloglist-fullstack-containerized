@@ -165,7 +165,7 @@ const Navbar = ({ currentUser, users }) => {
     <div className={classes.root}>
       <AppBar className={classes.navbar}>
         <Toolbar className={classes.toolbar}>
-          <Typography variant="h6" className={classes.title}>
+          <Typography variant="h5" className={classes.title}>
             Blog App
           </Typography>
           {currentUser &&

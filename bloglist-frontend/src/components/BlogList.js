@@ -21,9 +21,9 @@ const useStyles = makeStyles(() => ({
     textDecoration: 'none',
     color: '#000000'
   },
-  article: {
-    lineHeight: 1.35
-  },
+  // article: {
+  //   lineHeight: 1.35
+  // },
   addButton: {
     right: 20,
     bottom: 20,
@@ -46,17 +46,15 @@ const BlogList = ({ blogs }) => {
   }
 
   return (
-    <div>
+    <>
       <BlogForm dialogOpen={dialogOpen} handleDialogClose={handleDialogClose} />
       <List>
         {blogs.map(blog =>
           <Link to={`/blogs/${blog.id}`} className={classes.link} key={blog.id}>
             <ListItem button>
-              <article className={classes.article}>
-                <Typography variant="h6">
-                  {blog.title}
-                </Typography>
-              </article>
+              <Typography variant="h6">
+                {blog.title}
+              </Typography>
             </ListItem>
             <Divider />
           </Link>
@@ -65,7 +63,7 @@ const BlogList = ({ blogs }) => {
       <Fab size="medium" color="primary" className={classes.addButton} onClick={handleDialogOpen}>
         <AddIcon />
       </Fab>
-    </div>
+    </>
   )
 }
 
