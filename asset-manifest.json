@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.js": "/Ornellasd/bloglist-fullstack-containerized/static/js/main.6f9f99b7.chunk.js",
-    "main.js.map": "/Ornellasd/bloglist-fullstack-containerized/static/js/main.6f9f99b7.chunk.js.map",
-    "runtime-main.js": "/Ornellasd/bloglist-fullstack-containerized/static/js/runtime-main.7d9927ab.js",
-    "runtime-main.js.map": "/Ornellasd/bloglist-fullstack-containerized/static/js/runtime-main.7d9927ab.js.map",
-    "static/js/2.c548472d.chunk.js": "/Ornellasd/bloglist-fullstack-containerized/static/js/2.c548472d.chunk.js",
-    "static/js/2.c548472d.chunk.js.map": "/Ornellasd/bloglist-fullstack-containerized/static/js/2.c548472d.chunk.js.map",
-    "index.html": "/Ornellasd/bloglist-fullstack-containerized/index.html",
-    "static/js/2.c548472d.chunk.js.LICENSE.txt": "/Ornellasd/bloglist-fullstack-containerized/static/js/2.c548472d.chunk.js.LICENSE.txt"
+    "main.js": "/bloglist-fullstack-containerized/static/js/main.5fb29f97.chunk.js",
+    "main.js.map": "/bloglist-fullstack-containerized/static/js/main.5fb29f97.chunk.js.map",
+    "runtime-main.js": "/bloglist-fullstack-containerized/static/js/runtime-main.e2b274d5.js",
+    "runtime-main.js.map": "/bloglist-fullstack-containerized/static/js/runtime-main.e2b274d5.js.map",
+    "static/js/2.c548472d.chunk.js": "/bloglist-fullstack-containerized/static/js/2.c548472d.chunk.js",
+    "static/js/2.c548472d.chunk.js.map": "/bloglist-fullstack-containerized/static/js/2.c548472d.chunk.js.map",
+    "index.html": "/bloglist-fullstack-containerized/index.html",
+    "static/js/2.c548472d.chunk.js.LICENSE.txt": "/bloglist-fullstack-containerized/static/js/2.c548472d.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.7d9927ab.js",
+    "static/js/runtime-main.e2b274d5.js",
     "static/js/2.c548472d.chunk.js",
-    "static/js/main.6f9f99b7.chunk.js"
+    "static/js/main.5fb29f97.chunk.js"
   ]
 }
