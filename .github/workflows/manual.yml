@@ -3,10 +3,16 @@ name: CI
 on:
   push:
     branches:
-      - master
+      - main
+
+env:
+  COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
 
 jobs:
-  build:
+  build-and-deploy:
+    if: |
+        github.event_name == 'push'
+          && !contains(env.COMMIT_MESSAGES, '#skip')
 
     runs-on: ubuntu-latest
 
