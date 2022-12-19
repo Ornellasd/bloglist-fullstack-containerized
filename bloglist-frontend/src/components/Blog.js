@@ -46,14 +46,6 @@ const Blog = ({ loggedInUser, blogs }) => {
     }
   }
 
-  const handleCommentDialogOpen = () => {
-    setCommentDialogOpen(true)
-  }
-
-  const handleCommentDialogClose = () => {
-    setCommentDialogOpen(false)
-  }
-
   const handleCommentSubmit = (event) => {
     event.preventDefault()
     const comment = {
@@ -64,7 +56,7 @@ const Blog = ({ loggedInUser, blogs }) => {
 
     dispatch(addComment(commentedBlog))
     event.target.comment.value = ''
-    handleCommentDialogClose()
+    setCommentDialogOpen(false)
   }
 
   const dialog = () => (
@@ -85,7 +77,7 @@ const Blog = ({ loggedInUser, blogs }) => {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCommentDialogClose} color="primary">
+          <Button onClick={() => setCommentDialogOpen(false)} color="primary">
             Cancel
           </Button>
           <Button type="submit" color="primary">Create</Button>
@@ -113,7 +105,7 @@ const Blog = ({ loggedInUser, blogs }) => {
             <ThumbUp />
           </IconButton>
           <Typography>{blog.likes} likes</Typography>
-          <IconButton onClick={handleCommentDialogOpen}>
+          <IconButton onClick={() => setCommentDialogOpen(true)}>
             <Chat />
           </IconButton>
           {(loggedInUser && loggedInUser.username === blog.user.username) &&
