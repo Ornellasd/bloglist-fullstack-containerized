@@ -24,7 +24,6 @@ import Blog from './components/Blog'
 import Login from './components/Login'
 import Signup from './components/Signup'
 import Users from './components/Users'
-import User from './components/User'
 import Navbar from './components/Navbar'
 import Alerts from './components/Alerts'
 
@@ -61,7 +60,7 @@ const App = () => {
 
         <Switch>
           <Route path="/users/:id">
-            {loggedInUser ? <User /> : <Redirect to="/login" />}
+            {loggedInUser ? <BlogList users={users} /> : <Redirect to="/login" />}
           </Route>
           <Route path="/users">
             {loggedInUser ? <Users users={users} /> : <Redirect to="/login" />}
@@ -70,7 +69,7 @@ const App = () => {
             {loggedInUser ? <Blog loggedInUser={loggedInUser} blogs={blogs} /> : <Redirect to="/login" />}
           </Route>
           <Route path="/blogs">
-            {loggedInUser ? <BlogList blogs={blogs} /> : <Redirect to="/login" />}
+            {loggedInUser ? <BlogList allBlogs={blogs} users={users} /> : <Redirect to="/login" />}
           </Route>
           <Route path="/signup">
             <Signup />
