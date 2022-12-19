@@ -1,6 +1,5 @@
-import React from 'react'
-
-import { useState } from 'react'
+import React, { useState } from 'react'
+import { useParams } from 'react-router'
 import { Link } from 'react-router-dom'
 
 import {
@@ -29,11 +28,14 @@ const useStyles = makeStyles(() => ({
   },
 }))
 
-
-const BlogList = ({ blogs }) => {
-  const classes = useStyles()
-
+const BlogList = ({ allBlogs, users }) => {
   const [dialogOpen, setDialogOpen] = useState(false)
+
+  const classes = useStyles()
+  const userId  = useParams().id
+
+  const user = users.find(u => u.id === userId)
+  const blogList = user ? user.blogs : allBlogs
 
   const formatDate = rawDate => {
     const date = new Date(rawDate)
@@ -44,10 +46,10 @@ const BlogList = ({ blogs }) => {
     <>
       <BlogForm dialogOpen={dialogOpen} handleDialogClose={() => setDialogOpen(false)} />
       <List>
-        {blogs.map(blog =>
+        {blogList.map(blog =>
           <>
             <ListItem component={Link} to={`/blogs/${blog.id}`} key={blog.id} button>
-              <ListItemText primary={blog.title} secondary={`by ${blog.user.username}`} />
+              <ListItemText primary={blog.title} secondary={!user ? `by ${blog.user.username}` : '' } />
               <ListItemText className={classes.listItemDate}>
                 <Typography variant="caption">
                   {formatDate(blog.postedAt)}
