@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.js": "/bloglist-fullstack-containerized/static/js/main.e8db26d3.chunk.js",
-    "main.js.map": "/bloglist-fullstack-containerized/static/js/main.e8db26d3.chunk.js.map",
+    "main.js": "/bloglist-fullstack-containerized/static/js/main.020abe4f.chunk.js",
+    "main.js.map": "/bloglist-fullstack-containerized/static/js/main.020abe4f.chunk.js.map",
     "runtime-main.js": "/bloglist-fullstack-containerized/static/js/runtime-main.e2b274d5.js",
     "runtime-main.js.map": "/bloglist-fullstack-containerized/static/js/runtime-main.e2b274d5.js.map",
     "static/js/2.c548472d.chunk.js": "/bloglist-fullstack-containerized/static/js/2.c548472d.chunk.js",
@@ -12,6 +12,6 @@
   "entrypoints": [
     "static/js/runtime-main.e2b274d5.js",
     "static/js/2.c548472d.chunk.js",
-    "static/js/main.e8db26d3.chunk.js"
+    "static/js/main.020abe4f.chunk.js"
   ]
 }
