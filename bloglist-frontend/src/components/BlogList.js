@@ -35,14 +35,6 @@ const BlogList = ({ blogs }) => {
 
   const [dialogOpen, setDialogOpen] = useState(false)
 
-  const handleDialogOpen = () => {
-    setDialogOpen(true)
-  }
-
-  const handleDialogClose = () => {
-    setDialogOpen(false)
-  }
-
   const formatDate = rawDate => {
     const date = new Date(rawDate)
     return date.toLocaleDateString()
@@ -50,7 +42,7 @@ const BlogList = ({ blogs }) => {
 
   return (
     <>
-      <BlogForm dialogOpen={dialogOpen} handleDialogClose={handleDialogClose} />
+      <BlogForm dialogOpen={dialogOpen} handleDialogClose={() => setDialogOpen(false)} />
       <List>
         {blogs.map(blog =>
           <>
@@ -66,7 +58,7 @@ const BlogList = ({ blogs }) => {
           </>
         )}
       </List>
-      <Fab size="medium" color="primary" className={classes.addButton} onClick={handleDialogOpen}>
+      <Fab size="medium" color="primary" className={classes.addButton} onClick={() => setDialogOpen(true)}>
         <AddIcon />
       </Fab>
     </>
