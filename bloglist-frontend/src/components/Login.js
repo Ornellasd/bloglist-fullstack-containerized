@@ -102,7 +102,7 @@ const LoginWIP = ({ classes, dispatch, history, setIsLogIn }) => {
   )
 }
 
-const SignUpWIP = ({ classes, setIsLogIn, dispatch, history }) => {
+const SignUpWIP = ({ classes, setIsLogIn, dispatch }) => {
   const handleSubmit = async (event) => {
     event.preventDefault()
     if(event.target.password.value === event.target.password_confirm.value) {
@@ -115,7 +115,7 @@ const SignUpWIP = ({ classes, setIsLogIn, dispatch, history }) => {
       try {
         await signupService.signup(userCredentials)
         dispatch(setAlerts(['Sign Up was successful!'], 'success', 5))
-        history.push('/')
+        setIsLogIn(true)
       } catch(e) {
         console.log(e)
         dispatch(setAlerts(['Error with username or password'], 'error', 5))
@@ -202,7 +202,7 @@ const Login = ({ alerts }) => {
           {isLogIn ? 'Log In' : 'Sign Up'}
         </Typography>
         {isLogIn && <LoginWIP classes={classes} dispatch={dispatch} history={history} setIsLogIn={setIsLogIn} />}
-        {!isLogIn && <SignUpWIP classes={classes} dispatch={dispatch} history={history} setIsLogIn={setIsLogIn}/>}
+        {!isLogIn && <SignUpWIP classes={classes} dispatch={dispatch} setIsLogIn={setIsLogIn} />}
         {alerts && <Alerts alerts={alerts} />}
       </div>
     </Container>
