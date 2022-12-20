@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 
 import {
   Avatar,
@@ -11,14 +10,13 @@ import {
   Typography,
 } from '@material-ui/core'
 
+import { Link, useHistory } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
+
+import { login } from '../reducers/loginReducer'
+
 import Alerts from './Alerts'
-
-// import { useDispatch } from 'react-redux'
-// import { Link, useHistory } from 'react-router-dom'
-
-import { Link } from 'react-router-dom'
-
-// import { login } from '../reducers/loginReducer'
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -53,9 +51,17 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const LoginWIP = ({ classes, setIsLogIn }) => {
-  const handleSubmit = () => {
-    console.log('hieperdepiep')
+const LoginWIP = ({ classes, dispatch, history, setIsLogIn }) => {
+  const handleSubmit = event => {
+    event.preventDefault()
+
+    const userCredentials = {
+      username: event.target.username.value,
+      password: event.target.password.value
+    }
+
+    dispatch(login(userCredentials))
+    history.push('/')
   }
 
   return (
@@ -163,23 +169,10 @@ const SignUpWIP = ({ classes, setIsLogIn }) => {
 }
 
 const Login = ({ alerts }) => {
-  // const dispatch = useDispatch()
-  // const history = useHistory()
+  const dispatch = useDispatch()
+  const history = useHistory()
   const classes = useStyles()
-
   const [isLogIn, setIsLogIn] = useState(true)
-
-  // const handleSubmit = event => {
-  //   event.preventDefault()
-
-  //   const userCredentials = {
-  //     username: event.target.username.value,
-  //     password: event.target.password.value
-  //   }
-
-  //   dispatch(login(userCredentials))
-  //   history.push('/')
-  // }
 
   return (
     <Container maxWidth="sm">
@@ -190,8 +183,8 @@ const Login = ({ alerts }) => {
         <Typography component="h1" variant="h5">
           {isLogIn ? 'Log In' : 'Sign Up'}
         </Typography>
-        {isLogIn && <LoginWIP classes={classes} setIsLogIn={setIsLogIn} />}
-        {!isLogIn && <SignUpWIP classes={classes} setIsLogIn={setIsLogIn}/>}
+        {isLogIn && <LoginWIP classes={classes} dispatch={dispatch} history={history} setIsLogIn={setIsLogIn} />}
+        {!isLogIn && <SignUpWIP classes={classes} dispatch={dispatch} history={history} setIsLogIn={setIsLogIn}/>}
         {alerts && <Alerts alerts={alerts} />}
       </div>
     </Container>
