@@ -40,8 +40,16 @@ const useStyles = makeStyles(theme => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  nameField: {
+    width: '48%',
+  },
   link: {
-    textDecoration: 'none'
+    textDecoration: 'none',
+    marginLeft: '4px'
+  },
+  centerText: {
+    display: 'flex',
+    justifyContent: 'center',
   }
 }))
 
@@ -83,8 +91,8 @@ const LoginWIP = ({ classes, isLogIn, setIsLogIn }) => {
       >
         Log In
       </Button>
-      <Typography>
-        Don&apos;t have an account? Sign Up <Link className={classes.link} onClick={() => setIsLogIn(false)}>Here</Link>
+      <Typography className={classes.centerText}>
+        Don&apos;t have an account? Sign Up<Link className={classes.link} onClick={() => setIsLogIn(false)}>here</Link>
       </Typography>
     </form>
   )
@@ -155,8 +163,8 @@ const SignUpWIP = ({ classes, isLogIn, setIsLogIn }) => {
       >
         Sign Up
       </Button>
-      <Typography>
-          Have an account? Log In <Link className={classes.link} onClick={() => setIsLogIn(true)}>Here</Link>
+      <Typography className={classes.centerText}>
+          Have an account? Log In<Link className={classes.link} onClick={() => setIsLogIn(true)}>here</Link>
       </Typography>
     </form>
   )
