@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import {
   Avatar,
@@ -53,7 +53,9 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const LoginForm = ({ classes, dispatch, history, setIsLogIn }) => {
+const LoginForm = ({ classes, dispatch, history }) => {
+  history.push('/login')
+
   const handleSubmit = event => {
     event.preventDefault()
 
@@ -96,13 +98,15 @@ const LoginForm = ({ classes, dispatch, history, setIsLogIn }) => {
         Log In
       </Button>
       <Typography className={classes.centerText}>
-        Don&apos;t have an account? Sign Up<Link className={classes.link} onClick={() => setIsLogIn(false)}>here</Link>
+        Don&apos;t have an account? Sign Up<Link className={classes.link} onClick={() => history.push('/signup')}>here</Link>
       </Typography>
     </form>
   )
 }
 
-const SignUpForm = ({ classes, setIsLogIn, dispatch }) => {
+const SignUpForm = ({ classes, dispatch, history }) => {
+  history.push('/signup')
+
   const handleSubmit = async (event) => {
     event.preventDefault()
     if(event.target.password.value === event.target.password_confirm.value) {
@@ -115,7 +119,7 @@ const SignUpForm = ({ classes, setIsLogIn, dispatch }) => {
       try {
         await signupService.signup(userCredentials)
         dispatch(setAlerts(['Sign Up was successful!'], 'success', 5))
-        setIsLogIn(true)
+        history.push('/login')
       } catch(e) {
         console.log(e)
         dispatch(setAlerts(['Error with username or password'], 'error', 5))
@@ -180,17 +184,16 @@ const SignUpForm = ({ classes, setIsLogIn, dispatch }) => {
         Sign Up
       </Button>
       <Typography className={classes.centerText}>
-          Have an account? Log In<Link className={classes.link} onClick={() => setIsLogIn(true)}>here</Link>
+          Have an account? Log In<Link className={classes.link} onClick={() => history.push('/login')}>here</Link>
       </Typography>
     </form>
   )
 }
 
-const Entry = ({ alerts }) => {
+const Entry = ({ alerts, isLogIn }) => {
   const dispatch = useDispatch()
   const history = useHistory()
   const classes = useStyles()
-  const [isLogIn, setIsLogIn] = useState(true)
 
   return (
     <Container maxWidth="sm">
@@ -201,8 +204,8 @@ const Entry = ({ alerts }) => {
         <Typography component="h1" variant="h5">
           {isLogIn ? 'Log In' : 'Sign Up'}
         </Typography>
-        {isLogIn && <LoginForm classes={classes} dispatch={dispatch} history={history} setIsLogIn={setIsLogIn} />}
-        {!isLogIn && <SignUpForm classes={classes} dispatch={dispatch} setIsLogIn={setIsLogIn} />}
+        {isLogIn && <LoginForm classes={classes} dispatch={dispatch} history={history} />}
+        {!isLogIn && <SignUpForm classes={classes} dispatch={dispatch} history={history} />}
         {alerts && <Alerts alerts={alerts} />}
       </div>
     </Container>
