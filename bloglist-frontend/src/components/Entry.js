@@ -18,8 +18,6 @@ import signupService from '../services/signup'
 import { login } from '../reducers/loginReducer'
 import { setAlerts } from '../reducers/alertReducer'
 
-import Alerts from './Alerts'
-
 const useStyles = makeStyles(theme => ({
   paper: {
     display: 'flex',
@@ -190,7 +188,7 @@ const SignUpForm = ({ classes, dispatch, history }) => {
   )
 }
 
-const Entry = ({ alerts, isLogIn }) => {
+const Entry = ({ isLogIn }) => {
   const dispatch = useDispatch()
   const history = useHistory()
   const classes = useStyles()
@@ -206,7 +204,6 @@ const Entry = ({ alerts, isLogIn }) => {
         </Typography>
         {isLogIn && <LoginForm classes={classes} dispatch={dispatch} history={history} />}
         {!isLogIn && <SignUpForm classes={classes} dispatch={dispatch} history={history} />}
-        {alerts && <Alerts alerts={alerts} />}
       </div>
     </Container>
   )

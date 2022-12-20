@@ -52,10 +52,8 @@ const App = () => {
     <Container component="main" maxWidth="md">
       <CssBaseline />
       <Router>
-        <div>
-          <Navbar currentUser={loggedInUser} blogs={blogs} users={users} />
-          <Alerts alerts={alerts} />
-        </div>
+        <Navbar currentUser={loggedInUser} blogs={blogs} users={users} />
+        <Alerts alerts={alerts} />
 
         <Switch>
           <Route path="/users/:id">
@@ -71,10 +69,10 @@ const App = () => {
             {loggedInUser ? <BlogList allBlogs={blogs} users={users} /> : <Redirect to="/login" />}
           </Route>
           <Route path="/signup">
-            <Entry alerts={alerts} isLogIn={false} />
+            <Entry isLogIn={false} />
           </Route>
           <Route path="/">
-            {loggedInUser ? <Redirect to="/blogs" /> : <Entry alerts={alerts} isLogIn={true} />}
+            {loggedInUser ? <Redirect to="/blogs" /> : <Entry isLogIn={true} />}
           </Route>
         </Switch>
       </Router>
