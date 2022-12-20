@@ -21,8 +21,8 @@ import blogService from './services/blogs'
 
 import BlogList from './components/BlogList'
 import Blog from './components/Blog'
-import Login from './components/Login'
-import Signup from './components/Signup'
+import Entry from './components/Entry'
+// import Signup from './components/Signup'
 import Users from './components/Users'
 import Navbar from './components/Navbar'
 import Alerts from './components/Alerts'
@@ -71,11 +71,11 @@ const App = () => {
           <Route path="/blogs">
             {loggedInUser ? <BlogList allBlogs={blogs} users={users} /> : <Redirect to="/login" />}
           </Route>
-          <Route path="/signup">
+          {/* <Route path="/signup">
             <Signup />
-          </Route>
+          </Route> */}
           <Route path="/">
-            {loggedInUser ? <Redirect to="/blogs" /> : <Login alerts={alerts} />}
+            {loggedInUser ? <Redirect to="/blogs" /> : <Entry alerts={alerts} />}
           </Route>
         </Switch>
       </Router>

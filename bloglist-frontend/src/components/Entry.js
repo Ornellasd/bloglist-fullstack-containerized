@@ -53,7 +53,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const LoginWIP = ({ classes, dispatch, history, setIsLogIn }) => {
+const LoginForm = ({ classes, dispatch, history, setIsLogIn }) => {
   const handleSubmit = event => {
     event.preventDefault()
 
@@ -102,7 +102,7 @@ const LoginWIP = ({ classes, dispatch, history, setIsLogIn }) => {
   )
 }
 
-const SignUpWIP = ({ classes, setIsLogIn, dispatch }) => {
+const SignUpForm = ({ classes, setIsLogIn, dispatch }) => {
   const handleSubmit = async (event) => {
     event.preventDefault()
     if(event.target.password.value === event.target.password_confirm.value) {
@@ -186,7 +186,7 @@ const SignUpWIP = ({ classes, setIsLogIn, dispatch }) => {
   )
 }
 
-const Login = ({ alerts }) => {
+const Entry = ({ alerts }) => {
   const dispatch = useDispatch()
   const history = useHistory()
   const classes = useStyles()
@@ -201,12 +201,12 @@ const Login = ({ alerts }) => {
         <Typography component="h1" variant="h5">
           {isLogIn ? 'Log In' : 'Sign Up'}
         </Typography>
-        {isLogIn && <LoginWIP classes={classes} dispatch={dispatch} history={history} setIsLogIn={setIsLogIn} />}
-        {!isLogIn && <SignUpWIP classes={classes} dispatch={dispatch} setIsLogIn={setIsLogIn} />}
+        {isLogIn && <LoginForm classes={classes} dispatch={dispatch} history={history} setIsLogIn={setIsLogIn} />}
+        {!isLogIn && <SignUpForm classes={classes} dispatch={dispatch} setIsLogIn={setIsLogIn} />}
         {alerts && <Alerts alerts={alerts} />}
       </div>
     </Container>
   )
 }
 
-export default Login
+export default Entry
