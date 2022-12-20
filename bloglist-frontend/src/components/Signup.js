@@ -103,7 +103,6 @@ const Signup = () => {
               variant="outlined"
               margin="normal"
               required
-              autoFocus
               className={classes.nameField}
             />
           </Box>
@@ -114,7 +113,6 @@ const Signup = () => {
             margin="normal"
             required
             fullWidth
-            autoFocus
           />
           <TextField
             label="Password"
@@ -124,7 +122,6 @@ const Signup = () => {
             margin="normal"
             required
             fullWidth
-            autoFocus
           />
           <TextField
             label="Confirm Password"
@@ -134,7 +131,6 @@ const Signup = () => {
             margin="normal"
             required
             fullWidth
-            autoFocus
           />
           <Button
             type="submit"

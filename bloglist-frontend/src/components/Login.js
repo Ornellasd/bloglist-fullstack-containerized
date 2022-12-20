@@ -86,7 +86,6 @@ const Login = ({ alerts }) => {
             margin="normal"
             required
             fullWidth
-            autoFocus
           />
           <Button
             type="submit"
