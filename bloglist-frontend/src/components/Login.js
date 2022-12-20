@@ -53,13 +53,9 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const LoginWIP = ({ classes, isLogIn, setIsLogIn }) => {
+const LoginWIP = ({ classes, setIsLogIn }) => {
   const handleSubmit = () => {
     console.log('hieperdepiep')
-  }
-
-  if(!isLogIn) {
-    return null
   }
 
   return (
@@ -98,13 +94,9 @@ const LoginWIP = ({ classes, isLogIn, setIsLogIn }) => {
   )
 }
 
-const SignUpWIP = ({ classes, isLogIn, setIsLogIn }) => {
+const SignUpWIP = ({ classes, setIsLogIn }) => {
   const handleSubmit = () => {
     console.log('hieperdepiep')
-  }
-
-  if(isLogIn) {
-    return null
   }
 
   return (
@@ -198,8 +190,8 @@ const Login = ({ alerts }) => {
         <Typography component="h1" variant="h5">
           {isLogIn ? 'Log In' : 'Sign Up'}
         </Typography>
-        <SignUpWIP classes={classes} isLogIn={isLogIn} setIsLogIn={setIsLogIn}/>
-        <LoginWIP classes={classes} isLogIn={isLogIn} setIsLogIn={setIsLogIn} />
+        {isLogIn && <LoginWIP classes={classes} setIsLogIn={setIsLogIn} />}
+        {!isLogIn && <SignUpWIP classes={classes} setIsLogIn={setIsLogIn}/>}
         {alerts && <Alerts alerts={alerts} />}
       </div>
     </Container>
