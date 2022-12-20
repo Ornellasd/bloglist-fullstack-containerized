@@ -14,7 +14,9 @@ import { Link, useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 
+import signupService from '../services/signup'
 import { login } from '../reducers/loginReducer'
+import { setAlerts } from '../reducers/alertReducer'
 
 import Alerts from './Alerts'
 
@@ -100,9 +102,25 @@ const LoginWIP = ({ classes, dispatch, history, setIsLogIn }) => {
   )
 }
 
-const SignUpWIP = ({ classes, setIsLogIn }) => {
-  const handleSubmit = () => {
-    console.log('hieperdepiep')
+const SignUpWIP = ({ classes, setIsLogIn, dispatch, history }) => {
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+    if(event.target.password.value === event.target.password_confirm.value) {
+      const userCredentials = {
+        firstName: event.target.firstName.value,
+        lastName: event.target.lastName.value,
+        username: event.target.username.value,
+        password: event.target.password.value
+      }
+      try {
+        await signupService.signup(userCredentials)
+        dispatch(setAlerts(['Sign Up was successful!'], 'success', 5))
+        history.push('/')
+      } catch(e) {
+        console.log(e)
+        dispatch(setAlerts(['Error with username or password'], 'error', 5))
+      }
+    }
   }
 
   return (
