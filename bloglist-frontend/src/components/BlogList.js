@@ -10,13 +10,14 @@ import {
   ListItemText,
   makeStyles,
   Typography,
+  CircularProgress,
 } from '@material-ui/core'
 
 import AddIcon from '@material-ui/icons/Add'
 
 import BlogForm from '../components/BlogForm'
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   addButton: {
     right: 20,
     bottom: 20,
@@ -26,7 +27,18 @@ const useStyles = makeStyles(() => ({
     display: 'flex',
     justifyContent: 'flex-end',
   },
+  loadingContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    margin: theme.spacing(3, 0, 0),
+  },
 }))
+
+const Loading = ({ classes }) => (
+  <div className={classes.loadingContainer}>
+    <CircularProgress />
+  </div>
+)
 
 const BlogList = ({ allBlogs, users }) => {
   const [dialogOpen, setDialogOpen] = useState(false)
@@ -40,6 +52,10 @@ const BlogList = ({ allBlogs, users }) => {
   const formatDate = rawDate => {
     const date = new Date(rawDate)
     return date.toLocaleDateString()
+  }
+
+  if(allBlogs.length === 0 ) {
+    return <Loading classes={classes} />
   }
 
   return (
