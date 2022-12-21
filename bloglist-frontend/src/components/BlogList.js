@@ -43,7 +43,7 @@ const BlogList = ({ allBlogs, users }) => {
     return date.toLocaleDateString()
   }
 
-  if(allBlogs.length === 0 ) {
+  if(blogList.length === 0 ) {
     return <Loading />
   }
 
