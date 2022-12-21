@@ -56,19 +56,20 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const LoginForm = ({ classes, dispatch, history }) => {
+const LoginForm = ({ classes, dispatch, history, setIsLoading }) => {
   history.push('/login')
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = event => {
     event.preventDefault()
+
+    setIsLoading(true)
 
     const userCredentials = {
       username: event.target.username.value,
       password: event.target.password.value
     }
 
-    const data = await dispatch(login(userCredentials))
-    console.log(data, 'daaaayta')
+    dispatch(login(userCredentials))
   }
 
   return (
@@ -198,7 +199,7 @@ const Entry = ({ isLogIn }) => {
   const history = useHistory()
   const classes = useStyles()
 
-  const [isLoading, ] = useState(false)
+  const [isLoading, setIsLoading ] = useState(false)
 
   return (
     <Container maxWidth="sm" className={classes.paper}>
@@ -208,8 +209,8 @@ const Entry = ({ isLogIn }) => {
       <Typography component="h1" variant="h5">
         {isLogIn ? 'Log In' : 'Sign Up'}
       </Typography>
-      {(isLogIn && !isLoading) && <LoginForm classes={classes} dispatch={dispatch} history={history} />}
-      {(!isLogIn&& !isLoading) && <SignUpForm classes={classes} dispatch={dispatch} history={history} />}
+      {(isLogIn && !isLoading) && <LoginForm classes={classes} dispatch={dispatch} history={history} setIsLoading={setIsLoading} />}
+      {(!isLogIn && !isLoading) && <SignUpForm classes={classes} dispatch={dispatch} history={history} setIsLoading={setIsLoading}/>}
       {isLoading && <Loading />}
     </Container>
   )
