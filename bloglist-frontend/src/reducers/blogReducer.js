@@ -59,13 +59,11 @@ export const deleteBlog = (blog) => {
 
 export const getBlogs = () => {
   return async dispatch => {
-    setTimeout(async () => {
-      const blogs = await blogService.getAll()
-      dispatch({
-        type: 'SET_BLOGS',
-        data: blogs,
-      })
-    }, 5000)
+    const blogs = await blogService.getAll()
+    dispatch({
+      type: 'SET_BLOGS',
+      data: blogs,
+    })
   }
 }
 
