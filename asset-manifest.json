@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.js": "/bloglist-fullstack-containerized/static/js/main.86f4aea3.chunk.js",
-    "main.js.map": "/bloglist-fullstack-containerized/static/js/main.86f4aea3.chunk.js.map",
+    "main.js": "/bloglist-fullstack-containerized/static/js/main.8e549a0a.chunk.js",
+    "main.js.map": "/bloglist-fullstack-containerized/static/js/main.8e549a0a.chunk.js.map",
     "runtime-main.js": "/bloglist-fullstack-containerized/static/js/runtime-main.e2b274d5.js",
     "runtime-main.js.map": "/bloglist-fullstack-containerized/static/js/runtime-main.e2b274d5.js.map",
-    "static/js/2.89727daa.chunk.js": "/bloglist-fullstack-containerized/static/js/2.89727daa.chunk.js",
-    "static/js/2.89727daa.chunk.js.map": "/bloglist-fullstack-containerized/static/js/2.89727daa.chunk.js.map",
+    "static/js/2.18db3cbf.chunk.js": "/bloglist-fullstack-containerized/static/js/2.18db3cbf.chunk.js",
+    "static/js/2.18db3cbf.chunk.js.map": "/bloglist-fullstack-containerized/static/js/2.18db3cbf.chunk.js.map",
     "index.html": "/bloglist-fullstack-containerized/index.html",
-    "static/js/2.89727daa.chunk.js.LICENSE.txt": "/bloglist-fullstack-containerized/static/js/2.89727daa.chunk.js.LICENSE.txt"
+    "static/js/2.18db3cbf.chunk.js.LICENSE.txt": "/bloglist-fullstack-containerized/static/js/2.18db3cbf.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.e2b274d5.js",
-    "static/js/2.89727daa.chunk.js",
-    "static/js/main.86f4aea3.chunk.js"
+    "static/js/2.18db3cbf.chunk.js",
+    "static/js/main.8e549a0a.chunk.js"
   ]
 }
