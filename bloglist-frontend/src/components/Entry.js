@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
@@ -17,6 +17,8 @@ import { LockOutlined, AccountCircleOutlined } from '@material-ui/icons'
 import signupService from '../services/signup'
 import { login } from '../reducers/loginReducer'
 import { setAlerts } from '../reducers/alertReducer'
+
+import Loading from './Loading'
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -48,14 +50,19 @@ const useStyles = makeStyles(theme => ({
   centerText: {
     display: 'flex',
     justifyContent: 'center',
+  },
+  loader: {
+    margin: theme.spacing(3, 0, 2),
   }
 }))
 
-const LoginForm = ({ classes, dispatch, history }) => {
+const LoginForm = ({ classes, dispatch, history, setIsLoading }) => {
   history.push('/login')
 
   const handleSubmit = event => {
     event.preventDefault()
+
+    setIsLoading(true)
 
     const userCredentials = {
       username: event.target.username.value,
@@ -63,7 +70,6 @@ const LoginForm = ({ classes, dispatch, history }) => {
     }
 
     dispatch(login(userCredentials))
-    history.push('/')
   }
 
   return (
@@ -193,6 +199,8 @@ const Entry = ({ isLogIn }) => {
   const history = useHistory()
   const classes = useStyles()
 
+  const [isLoading, setIsLoading ] = useState(false)
+
   return (
     <Container maxWidth="sm" className={classes.paper}>
       <Avatar className={classes.avatar}>
@@ -201,8 +209,9 @@ const Entry = ({ isLogIn }) => {
       <Typography component="h1" variant="h5">
         {isLogIn ? 'Log In' : 'Sign Up'}
       </Typography>
-      {isLogIn && <LoginForm classes={classes} dispatch={dispatch} history={history} />}
-      {!isLogIn && <SignUpForm classes={classes} dispatch={dispatch} history={history} />}
+      {(isLogIn && !isLoading) && <LoginForm classes={classes} dispatch={dispatch} history={history} setIsLoading={setIsLoading} />}
+      {(!isLogIn && !isLoading) && <SignUpForm classes={classes} dispatch={dispatch} history={history} setIsLoading={setIsLoading}/>}
+      {isLoading && <Loading />}
     </Container>
   )
 }
