@@ -1,4 +1,6 @@
 import React from 'react'
+import { Link, useHistory } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 
 import {
   Avatar,
@@ -10,9 +12,7 @@ import {
   Typography,
 } from '@material-ui/core'
 
-import { Link, useHistory } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
+import { LockOutlined, AccountCircleOutlined } from '@material-ui/icons'
 
 import signupService from '../services/signup'
 import { login } from '../reducers/loginReducer'
@@ -96,7 +96,7 @@ const LoginForm = ({ classes, dispatch, history }) => {
         Log In
       </Button>
       <Typography className={classes.centerText}>
-        Don&apos;t have an account? Sign Up<Link className={classes.link} onClick={() => history.push('/signup')}>here</Link>
+        Don&apos;t have an account? Sign up<Link className={classes.link} onClick={() => history.push('/signup')}>here</Link>
       </Typography>
     </form>
   )
@@ -182,7 +182,7 @@ const SignUpForm = ({ classes, dispatch, history }) => {
         Sign Up
       </Button>
       <Typography className={classes.centerText}>
-          Have an account? Log In<Link className={classes.link} onClick={() => history.push('/login')}>here</Link>
+          Have an account? Log in<Link className={classes.link} onClick={() => history.push('/login')}>here</Link>
       </Typography>
     </form>
   )
@@ -194,17 +194,15 @@ const Entry = ({ isLogIn }) => {
   const classes = useStyles()
 
   return (
-    <Container maxWidth="sm">
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          {isLogIn ? 'Log In' : 'Sign Up'}
-        </Typography>
-        {isLogIn && <LoginForm classes={classes} dispatch={dispatch} history={history} />}
-        {!isLogIn && <SignUpForm classes={classes} dispatch={dispatch} history={history} />}
-      </div>
+    <Container maxWidth="sm" className={classes.paper}>
+      <Avatar className={classes.avatar}>
+        {isLogIn ? <LockOutlined /> : <AccountCircleOutlined />}
+      </Avatar>
+      <Typography component="h1" variant="h5">
+        {isLogIn ? 'Log In' : 'Sign Up'}
+      </Typography>
+      {isLogIn && <LoginForm classes={classes} dispatch={dispatch} history={history} />}
+      {!isLogIn && <SignUpForm classes={classes} dispatch={dispatch} history={history} />}
     </Container>
   )
 }
