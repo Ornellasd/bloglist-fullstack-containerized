@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import {
   Avatar,
@@ -195,7 +195,15 @@ const Entry = ({ isLogIn }) => {
   const history = useHistory()
   const classes = useStyles()
 
+  const alerts = useSelector(state => state.alerts)
+
   const [isLoading, setIsLoading] = useState(false)
+
+  useEffect(() => {
+    if (alerts.type === 'error') {
+      setIsLoading(false)
+    }
+  }, [alerts])
 
   return (
     <Container maxWidth="sm" className={classes.paper}>
