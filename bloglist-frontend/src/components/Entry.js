@@ -57,8 +57,6 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const LoginForm = ({ classes, dispatch, history, setIsLoading }) => {
-  history.push('/login')
-
   const handleSubmit = event => {
     event.preventDefault()
 
@@ -109,11 +107,9 @@ const LoginForm = ({ classes, dispatch, history, setIsLoading }) => {
 }
 
 const SignUpForm = ({ classes, dispatch, history }) => {
-  history.push('/signup')
-
   const handleSubmit = async (event) => {
     event.preventDefault()
-    if(event.target.password.value === event.target.password_confirm.value) {
+    if (event.target.password.value === event.target.password_confirm.value) {
       const userCredentials = {
         firstName: event.target.firstName.value,
         lastName: event.target.lastName.value,
@@ -124,7 +120,7 @@ const SignUpForm = ({ classes, dispatch, history }) => {
         await signupService.signup(userCredentials)
         dispatch(setAlerts(['Sign Up was successful!'], 'success', 5))
         history.push('/login')
-      } catch(e) {
+      } catch (e) {
         console.log(e)
         dispatch(setAlerts(['Error with username or password'], 'error', 5))
       }
@@ -188,7 +184,7 @@ const SignUpForm = ({ classes, dispatch, history }) => {
         Sign Up
       </Button>
       <Typography className={classes.centerText}>
-          Have an account? Log in<Link className={classes.link} onClick={() => history.push('/login')}>here</Link>
+        Have an account? Log in<Link className={classes.link} onClick={() => history.push('/login')}>here</Link>
       </Typography>
     </form>
   )
@@ -199,7 +195,7 @@ const Entry = ({ isLogIn }) => {
   const history = useHistory()
   const classes = useStyles()
 
-  const [isLoading, setIsLoading ] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   return (
     <Container maxWidth="sm" className={classes.paper}>
@@ -210,7 +206,7 @@ const Entry = ({ isLogIn }) => {
         {isLogIn ? 'Log In' : 'Sign Up'}
       </Typography>
       {(isLogIn && !isLoading) && <LoginForm classes={classes} dispatch={dispatch} history={history} setIsLoading={setIsLoading} />}
-      {(!isLogIn && !isLoading) && <SignUpForm classes={classes} dispatch={dispatch} history={history} setIsLoading={setIsLoading}/>}
+      {(!isLogIn && !isLoading) && <SignUpForm classes={classes} dispatch={dispatch} history={history} setIsLoading={setIsLoading} />}
       {isLoading && <Loading />}
     </Container>
   )
