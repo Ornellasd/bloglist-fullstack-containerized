@@ -41,7 +41,7 @@ const App = () => {
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
-    if(loggedUserJSON) {
+    if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
       blogService.setToken(user.token)
       dispatch(initializeUser(user))
@@ -70,6 +70,9 @@ const App = () => {
           </Route>
           <Route path="/signup">
             <Entry isLogIn={false} />
+          </Route>
+          <Route path="/login">
+            {!loggedInUser ? <Entry isLogIn={true} /> : <Redirect to="/" />}
           </Route>
           <Route path="/">
             {loggedInUser ? <Redirect to="/blogs" /> : <Entry isLogIn={true} />}
