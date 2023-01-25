@@ -54,8 +54,6 @@ const BlogList = ({ allBlogs, users }) => {
 
   if (loading) {
     return <Loading />
-  } else if (blogList.length === 0) {
-    return <Typography className={classes.centerText}>No posts found :(</Typography>
   }
 
   return (
@@ -76,6 +74,9 @@ const BlogList = ({ allBlogs, users }) => {
           </>
         )}
       </List>
+      {blogList.length === 0 &&
+        <Typography className={classes.centerText}>No posts found :(</Typography>
+      }
       <Fab size="medium" color="primary" className={classes.addButton} onClick={() => setDialogOpen(true)}>
         <AddIcon />
       </Fab>
