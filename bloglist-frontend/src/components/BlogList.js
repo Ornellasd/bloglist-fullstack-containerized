@@ -33,7 +33,7 @@ const BlogList = ({ allBlogs, users }) => {
   const [dialogOpen, setDialogOpen] = useState(false)
 
   const classes = useStyles()
-  const userId  = useParams().id
+  const userId = useParams().id
 
   const user = users.find(u => u.id === userId)
   const blogList = user ? user.blogs : allBlogs
@@ -43,7 +43,9 @@ const BlogList = ({ allBlogs, users }) => {
     return date.toLocaleDateString()
   }
 
-  if(blogList.length === 0 ) {
+  console.log(blogList, 'blooooog list')
+
+  if (blogList.length === 0) {
     return <Loading />
   }
 
@@ -54,7 +56,7 @@ const BlogList = ({ allBlogs, users }) => {
         {blogList.map(blog =>
           <>
             <ListItem component={Link} to={`/blogs/${blog.id}`} key={blog.id} button>
-              <ListItemText primary={blog.title} secondary={!user ? `by ${blog.user.username}` : '' } />
+              <ListItemText primary={blog.title} secondary={!user ? `by ${blog.user.username}` : ''} />
               <ListItemText className={classes.listItemDate}>
                 <Typography variant="caption">
                   {formatDate(blog.postedAt)}
