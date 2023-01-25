@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import { Link } from 'react-router-dom'
 
@@ -26,11 +26,16 @@ const useStyles = makeStyles(() => ({
   listItemDate: {
     display: 'flex',
     justifyContent: 'flex-end',
+  },
+  centerText: {
+    display: 'flex',
+    justifyContent: 'center'
   }
 }))
 
 const BlogList = ({ allBlogs, users }) => {
   const [dialogOpen, setDialogOpen] = useState(false)
+  const [loading, setLoading] = useState(true)
 
   const classes = useStyles()
   const userId = useParams().id
@@ -38,15 +43,19 @@ const BlogList = ({ allBlogs, users }) => {
   const user = users.find(u => u.id === userId)
   const blogList = user ? user.blogs : allBlogs
 
+  useEffect(() => {
+    setLoading(false)
+  }, [blogList])
+
   const formatDate = rawDate => {
     const date = new Date(rawDate)
     return date.toLocaleDateString()
   }
 
-  console.log(blogList, 'blooooog list')
-
-  if (blogList.length === 0) {
+  if (loading) {
     return <Loading />
+  } else if (blogList.length === 0) {
+    return <Typography className={classes.centerText}>No posts found :(</Typography>
   }
 
   return (
