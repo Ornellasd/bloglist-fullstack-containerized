@@ -28,9 +28,13 @@ const blogReducer = (state = initialState, action) => {
         blogs: action.data.sort(order)
       }
     case 'UPVOTE': {
-      const id = action.data.id
-      const blogToChange = state.find(b => b.id === id)
-      return state.map(blog => blog.id !== id ? blog : blogToChange).sort(order)
+      const id = action.data
+      const blogToChange = state.blogs.find(b => b.id === id)
+      return {
+        ...state,
+        blogs: state.blogs.map(blog => blog.id !== id ? blog : blogToChange).sort(order)
+
+      }
     }
     case 'ADD_COMMENT': {
       const id = action.data.id
@@ -85,7 +89,7 @@ export const upvote = upvotedBlog => {
     await blogService.update(upvotedBlog)
     dispatch({
       type: 'UPVOTE',
-      data: { id: upvotedBlog.id }
+      data: upvotedBlog.id
     })
   }
 }
