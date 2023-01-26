@@ -8,6 +8,7 @@ const order = (a, b) => {
 
 const initialState = {
   blogs: [],
+  requestInProgress: true,
 }
 
 const blogReducer = (state = initialState, action) => {
@@ -25,7 +26,8 @@ const blogReducer = (state = initialState, action) => {
     case 'SET_BLOGS':
       return {
         ...state,
-        blogs: action.data.sort(order)
+        blogs: action.data.sort(order),
+        requestInProgress: false,
       }
     case 'UPVOTE': {
       const id = action.data
@@ -82,6 +84,7 @@ export const deleteBlog = (blog) => {
 export const getBlogs = () => {
   return async dispatch => {
     const blogs = await blogService.getAll()
+
     dispatch({
       type: 'SET_BLOGS',
       data: blogs,
