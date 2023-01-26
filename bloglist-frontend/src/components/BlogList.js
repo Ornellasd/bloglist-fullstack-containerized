@@ -33,21 +33,21 @@ const useStyles = makeStyles(() => ({
   }
 }))
 
-const BlogList = ({ allBlogs, users }) => {
+const BlogList = ({ blogData, users }) => {
   const [dialogOpen, setDialogOpen] = useState(false)
 
   const classes = useStyles()
   const userId = useParams().id
 
   const user = users.find(u => u.id === userId)
-  const blogList = user ? user.blogs : allBlogs.blogs
+  const blogList = user ? user.blogs : blogData.blogs
 
   const formatDate = rawDate => {
     const date = new Date(rawDate)
     return date.toLocaleDateString()
   }
 
-  if (allBlogs.requestInProgress) {
+  if (blogData.requestInProgress) {
     return <Loading />
   }
 

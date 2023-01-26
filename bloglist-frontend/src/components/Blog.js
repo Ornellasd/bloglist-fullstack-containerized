@@ -28,6 +28,8 @@ import { upvote, addComment, deleteBlog } from '../reducers/blogReducer'
 const Blog = ({ loggedInUser, blogs }) => {
   const [commentDialogOpen, setCommentDialogOpen] = useState(false)
 
+  console.log(blogs, 'blergs')
+
   const id = useParams().id
   const dispatch = useDispatch()
   const history = useHistory()
@@ -40,7 +42,7 @@ const Blog = ({ loggedInUser, blogs }) => {
   }
 
   const handleDelete = () => {
-    if(window.confirm(`Delete '${blog.title}' by ${blog.author}?`)) {
+    if (window.confirm(`Delete '${blog.title}' by ${blog.author}?`)) {
       dispatch(deleteBlog(blog))
       history.push('/')
     }
