@@ -30,7 +30,7 @@ const App = () => {
   const dispatch = useDispatch()
 
   const alerts = useSelector(state => state.alerts)
-  const blogs = useSelector(state => state.blogs)
+  const blogs = useSelector(state => state.blogList.blogs)
   const loggedInUser = useSelector(state => state.login)
   const users = useSelector(state => state.users)
 

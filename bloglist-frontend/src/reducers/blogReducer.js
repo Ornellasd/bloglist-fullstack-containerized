@@ -6,18 +6,28 @@ const order = (a, b) => {
   return b.likes - a.likes
 }
 
-const blogReducer = (state = [], action) => {
-  switch(action.type) {
+const initialState = {
+  blogs: [],
+}
+
+const blogReducer = (state = initialState, action) => {
+  switch (action.type) {
     case 'NEW_BLOG':
-      return [...state, action.data]
+      return {
+        ...state,
+        blogs: state.blogs.push(action.data),
+      }
     case 'DELETE_BLOG':
       return state.filter(b => b.id !== action.data)
     case 'SET_BLOGS':
-      return action.data.sort(order)
+      return {
+        ...state,
+        blogs: action.data.sort(order)
+      }
     case 'UPVOTE': {
       const id = action.data.id
       const blogToChange = state.find(b => b.id === id)
-      return state.map(blog => blog.id !== id ? blog: blogToChange).sort(order)
+      return state.map(blog => blog.id !== id ? blog : blogToChange).sort(order)
     }
     case 'ADD_COMMENT': {
       const id = action.data.id
@@ -40,7 +50,7 @@ export const createBlog = content => {
       })
       dispatch(getBlogs())
       dispatch(setAlerts([`${newBlog.title} added`], 'success', 5))
-    } catch(e) {
+    } catch (e) {
       dispatch(setAlerts(Object.values(e.response.data), 'error', 5))
     }
   }
