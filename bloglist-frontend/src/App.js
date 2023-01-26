@@ -52,7 +52,7 @@ const App = () => {
     <Container component="main" maxWidth="md">
       <CssBaseline />
       <Router>
-        <Navbar currentUser={loggedInUser} blogs={blogData} users={users} />
+        <Navbar currentUser={loggedInUser} users={users} />
         <Alerts alerts={alerts} />
 
         <Switch>
