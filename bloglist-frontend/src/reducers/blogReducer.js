@@ -18,7 +18,10 @@ const blogReducer = (state = initialState, action) => {
         blogs: [...state.blogs, action.data]
       }
     case 'DELETE_BLOG':
-      return state.filter(b => b.id !== action.data)
+      return {
+        ...state,
+        blogs: state.blogs.filter(b => b.id !== action.data)
+      }
     case 'SET_BLOGS':
       return {
         ...state,
