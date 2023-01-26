@@ -25,16 +25,14 @@ import {
 
 import { upvote, addComment, deleteBlog } from '../reducers/blogReducer'
 
-const Blog = ({ loggedInUser, blogs }) => {
+const Blog = ({ loggedInUser, blogData }) => {
   const [commentDialogOpen, setCommentDialogOpen] = useState(false)
-
-  console.log(blogs, 'blergs')
 
   const id = useParams().id
   const dispatch = useDispatch()
   const history = useHistory()
 
-  const blog = blogs.find(b => b.id === id)
+  const blog = blogData.blogs.find(b => b.id === id)
 
   const handleUpvote = () => {
     const upvotedBlog = { ...blog, likes: blog.likes += 1, user: blog.user.id }

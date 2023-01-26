@@ -63,7 +63,7 @@ const App = () => {
             {loggedInUser ? <Users users={users} /> : <Redirect to="/login" />}
           </Route>
           <Route path="/blogs/:id">
-            {loggedInUser ? <Blog loggedInUser={loggedInUser} blogs={blogData} /> : <Redirect to="/login" />}
+            {loggedInUser ? <Blog loggedInUser={loggedInUser} blogData={blogData} /> : <Redirect to="/login" />}
           </Route>
           <Route path="/blogs">
             {loggedInUser ? <BlogList blogData={blogData} users={users} /> : <Redirect to="/login" />}
