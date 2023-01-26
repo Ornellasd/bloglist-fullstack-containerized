@@ -27,8 +27,8 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     paddingBottom: 20
   },
-  navbar : {
-    backgroundColor : '#689f38'
+  navbar: {
+    backgroundColor: '#689f38'
   },
   title: {
     marginRight: theme.spacing(5),
@@ -93,7 +93,7 @@ const ListItemLink = ({ text, href, ...props }) => {
   )
 }
 
-const MenuDrawer = () => {
+const MenuDrawer = ({ user }) => {
   const classes = useStyles()
   const dispatch = useDispatch()
 
@@ -101,7 +101,7 @@ const MenuDrawer = () => {
   const [selectedIndex, setSelectedIndex] = useState(0)
 
   const toggleDrawer = (event, open) => {
-    if(
+    if (
       event && event.type === 'keydown' &&
       (event.key === 'Tab' || event.key === 'Shift')
     ) {
@@ -148,6 +148,7 @@ const MenuDrawer = () => {
             <ListItemLink text="Blogs" href="/blogs" onClick={(e) => handleListItemClick(e, 0)} selected={selectedIndex === 0} />
             <ListItemLink text="Users" href="/users" onClick={(e) => handleListItemClick(e, 1)} selected={selectedIndex === 1} />
             <Divider />
+            <ListItemLink text="My Posts" href={`/users/${user && user.id}`} onClick={(e) => handleListItemClick(e, 2)} selected={selectedIndex === 2} />
             <ListItemLink text="Log Out" onClick={() => dispatch(logout())} />
           </List>
         </div>
@@ -175,14 +176,14 @@ const Navbar = ({ currentUser, users }) => {
                 <Button color="inherit" component={Link} to="/users">Users</Button>
               </div>
 
-              <MenuDrawer />
+              <MenuDrawer user={user} />
 
               <div className={classes.userCorner}>
                 <Typography className={classes.userCornerItem}>
                   Hello, {user && user.username}
                 </Typography>
                 <Divider style={{ background: '#92C565' }} orientation="vertical" variant="middle" flexItem />
-                <Button color="inherit" component={Link}  to={user && `/users/${user.id}`} >My Posts</Button>
+                <Button color="inherit" component={Link} to={user && `/users/${user.id}`} >My Posts</Button>
                 <Button color="inherit" onClick={() => dispatch(logout())}>Logout</Button>
               </div>
             </>
