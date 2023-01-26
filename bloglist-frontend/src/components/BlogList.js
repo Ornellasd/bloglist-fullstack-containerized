@@ -47,7 +47,7 @@ const BlogList = ({ blogData, users }) => {
     return date.toLocaleDateString()
   }
 
-  if (blogData.requestInProgress) {
+  if (blogData && blogData.requestInProgress) {
     return <Loading />
   }
 
