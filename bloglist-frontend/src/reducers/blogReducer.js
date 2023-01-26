@@ -6,24 +6,48 @@ const order = (a, b) => {
   return b.likes - a.likes
 }
 
-const blogReducer = (state = [], action) => {
-  switch(action.type) {
+const initialState = {
+  blogs: [],
+  requestInProgress: true,
+}
+
+const blogReducer = (state = initialState, action) => {
+  switch (action.type) {
     case 'NEW_BLOG':
-      return [...state, action.data]
+      return {
+        ...state,
+        blogs: [...state.blogs, action.data]
+      }
     case 'DELETE_BLOG':
-      return state.filter(b => b.id !== action.data)
+      return {
+        ...state,
+        blogs: state.blogs.filter(b => b.id !== action.data)
+      }
     case 'SET_BLOGS':
-      return action.data.sort(order)
+      return {
+        ...state,
+        blogs: action.data.sort(order),
+        requestInProgress: false,
+      }
     case 'UPVOTE': {
-      const id = action.data.id
-      const blogToChange = state.find(b => b.id === id)
-      return state.map(blog => blog.id !== id ? blog: blogToChange).sort(order)
+      const id = action.data
+      const blogToChange = state.blogs.find(b => b.id === id)
+      return {
+        ...state,
+        blogs: state.blogs.map(blog => blog.id !== id ? blog : blogToChange).sort(order)
+      }
     }
     case 'ADD_COMMENT': {
       const id = action.data.id
-      const blogToChange = state.find(b => b.id === id)
-      const commentedBlog = { ...blogToChange, comments: action.data.comments }
-      return state.map(blog => blog.id !== id ? blog : commentedBlog)
+      const blogToChange = state.blogs.find(b => b.id === id)
+      const commentedBlog = {
+        ...blogToChange,
+        comments: action.data.comments
+      }
+      return {
+        ...state,
+        blogs: state.blogs.map(blog => blog.id !== id ? blog : commentedBlog)
+      }
     }
     default:
       return state
@@ -40,7 +64,7 @@ export const createBlog = content => {
       })
       dispatch(getBlogs())
       dispatch(setAlerts([`${newBlog.title} added`], 'success', 5))
-    } catch(e) {
+    } catch (e) {
       dispatch(setAlerts(Object.values(e.response.data), 'error', 5))
     }
   }
@@ -60,6 +84,7 @@ export const deleteBlog = (blog) => {
 export const getBlogs = () => {
   return async dispatch => {
     const blogs = await blogService.getAll()
+
     dispatch({
       type: 'SET_BLOGS',
       data: blogs,
@@ -72,7 +97,7 @@ export const upvote = upvotedBlog => {
     await blogService.update(upvotedBlog)
     dispatch({
       type: 'UPVOTE',
-      data: { id: upvotedBlog.id }
+      data: upvotedBlog.id
     })
   }
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useParams } from 'react-router'
 import { Link } from 'react-router-dom'
 
@@ -35,24 +35,19 @@ const useStyles = makeStyles(() => ({
 
 const BlogList = ({ allBlogs, users }) => {
   const [dialogOpen, setDialogOpen] = useState(false)
-  const [loading, setLoading] = useState(true)
 
   const classes = useStyles()
   const userId = useParams().id
 
   const user = users.find(u => u.id === userId)
-  const blogList = user ? user.blogs : allBlogs
-
-  useEffect(() => {
-    setLoading(false)
-  }, [blogList])
+  const blogList = user ? user.blogs : allBlogs.blogs
 
   const formatDate = rawDate => {
     const date = new Date(rawDate)
     return date.toLocaleDateString()
   }
 
-  if (loading) {
+  if (allBlogs.requestInProgress) {
     return <Loading />
   }
 

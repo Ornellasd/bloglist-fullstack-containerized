@@ -30,7 +30,7 @@ const App = () => {
   const dispatch = useDispatch()
 
   const alerts = useSelector(state => state.alerts)
-  const blogs = useSelector(state => state.blogs)
+  const blogList = useSelector(state => state.blogList)
   const loggedInUser = useSelector(state => state.login)
   const users = useSelector(state => state.users)
 
@@ -52,7 +52,7 @@ const App = () => {
     <Container component="main" maxWidth="md">
       <CssBaseline />
       <Router>
-        <Navbar currentUser={loggedInUser} blogs={blogs} users={users} />
+        <Navbar currentUser={loggedInUser} blogs={blogList} users={users} />
         <Alerts alerts={alerts} />
 
         <Switch>
@@ -63,10 +63,10 @@ const App = () => {
             {loggedInUser ? <Users users={users} /> : <Redirect to="/login" />}
           </Route>
           <Route path="/blogs/:id">
-            {loggedInUser ? <Blog loggedInUser={loggedInUser} blogs={blogs} /> : <Redirect to="/login" />}
+            {loggedInUser ? <Blog loggedInUser={loggedInUser} blogs={blogList} /> : <Redirect to="/login" />}
           </Route>
           <Route path="/blogs">
-            {loggedInUser ? <BlogList allBlogs={blogs} users={users} /> : <Redirect to="/login" />}
+            {loggedInUser ? <BlogList allBlogs={blogList} users={users} /> : <Redirect to="/login" />}
           </Route>
           <Route path="/signup">
             <Entry isLogIn={false} />
