@@ -34,11 +34,6 @@ const Blog = ({ loggedInUser, blogData }) => {
 
   const blog = blogData.blogs.find(b => b.id === id)
 
-  const handleUpvote = () => {
-    const upvotedBlog = { ...blog, likes: blog.likes += 1, user: blog.user.id }
-    dispatch(upvote(upvotedBlog))
-  }
-
   const handleDelete = () => {
     if (window.confirm(`Delete '${blog.title}' by ${blog.author}?`)) {
       dispatch(deleteBlog(blog))
@@ -87,7 +82,7 @@ const Blog = ({ loggedInUser, blogData }) => {
   )
 
   return (
-    <div>
+    <>
       <Card variant="outlined" style={{ marginBottom: 20 }}>
         <CardContent>
           <Typography variant="h5">
@@ -101,7 +96,7 @@ const Blog = ({ loggedInUser, blogData }) => {
           </Typography>
         </CardContent>
         <CardActions>
-          <IconButton onClick={() => handleUpvote()}>
+          <IconButton onClick={() => dispatch(upvote(blog, loggedInUser))}>
             <ThumbUp />
           </IconButton>
           <Typography>{blog.likes} likes</Typography>
@@ -132,7 +127,7 @@ const Blog = ({ loggedInUser, blogData }) => {
         </div>
       }
       {dialog()}
-    </div>
+    </>
   )
 }
 

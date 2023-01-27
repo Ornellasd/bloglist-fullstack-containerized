@@ -17,6 +17,7 @@ const blogSchema = new mongoose.Schema({
     minLength: 4
   },
   likes: Number,
+  upvoters: [String],
   postedAt: {
     type: Date,
     default: Date.now,
@@ -26,7 +27,7 @@ const blogSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   },
-  comments: [{ 
+  comments: [{
     text: String
   }]
 })
