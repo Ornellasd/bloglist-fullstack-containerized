@@ -96,7 +96,15 @@ const Blog = ({ loggedInUser, blogData }) => {
           </Typography>
         </CardContent>
         <CardActions>
-          <IconButton onClick={() => dispatch(upvote(blog, loggedInUser))}>
+          <IconButton
+            onClick={
+              () => dispatch(upvote(blog, loggedInUser))
+            }
+            color={blog.upvoters.includes(loggedInUser.username)
+              ? 'primary'
+              : 'default'
+            }
+          >
             <ThumbUp />
           </IconButton>
           <Typography>{blog.likes} likes</Typography>
