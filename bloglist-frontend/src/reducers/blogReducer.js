@@ -96,19 +96,21 @@ export const getBlogs = () => {
 export const upvote = (blog, upvoter) => {
   return async dispatch => {
 
-    const upvotedBlog = {
-      ...blog,
-      // not sure why not setting user here causes "Cast to ObjectId failed..."
-      user: blog.user.id,
-      upvoters: [...blog.upvoters, upvoter.username]
+    if (!blog.upvoters.includes(upvoter.username)) {
+      const upvotedBlog = {
+        ...blog,
+        // not sure why not setting user here causes "Cast to ObjectId failed..."
+        user: blog.user.id,
+        upvoters: [...blog.upvoters, upvoter.username]
+      }
+
+      await blogService.update(upvotedBlog)
+
+      dispatch({
+        type: 'UPVOTE',
+        data: upvoter
+      })
     }
-
-    await blogService.update(upvotedBlog)
-
-    dispatch({
-      type: 'UPVOTE',
-      data: upvoter
-    })
   }
 }
 
