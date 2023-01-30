@@ -30,13 +30,13 @@ const blogReducer = (state = initialState, action) => {
         requestInProgress: false,
       }
     case 'UPVOTE': {
-      // const id = action.data
-      // const blogToChange = state.blogs.find(b => b.id === id)
-      // return {
-      //   ...state,
-      //   blogs: state.blogs.map(blog => blog.id !== id ? blog : blogToChange).sort(order)
-      // }
-      return state
+      const id = action.data.id
+      const blogToChange = state.blogs.find(b => b.id === id)
+
+      return {
+        ...state,
+        blogs: state.blogs.map(blog => blog.id !== id ? blog : blogToChange).sort(order)
+      }
     }
     case 'ADD_COMMENT': {
       const id = action.data.id
@@ -96,21 +96,27 @@ export const getBlogs = () => {
 export const upvote = (blog, upvoter) => {
   return async dispatch => {
 
-    if (!blog.upvoters.includes(upvoter.username)) {
-      const upvotedBlog = {
-        ...blog,
-        // not sure why not setting user here causes "Cast to ObjectId failed..."
-        user: blog.user.id,
-        upvoters: [...blog.upvoters, upvoter.username]
-      }
-
-      await blogService.update(upvotedBlog)
-
-      dispatch({
-        type: 'UPVOTE',
-        data: upvoter
-      })
+    const upvotedBlog = {
+      ...blog,
+      // not sure why not setting user here causes "Cast to ObjectId failed..."
+      user: blog.user.id,
+      upvoters:
+        !blog.upvoters.includes(upvoter.username)
+          ? [...blog.upvoters, upvoter.username]
+          : blog.upvoters.filter(username => username !== upvoter.username)
     }
+
+    await blogService.update(upvotedBlog)
+
+    dispatch({
+      type: 'UPVOTE',
+      data: {
+        'id': blog.id,
+        'user': upvoter,
+      }
+    })
+
+    dispatch(getBlogs())
   }
 }
 
