@@ -60,7 +60,7 @@ blogRouter.delete('/:id', middleware.userExtractor, async (request, response) =>
 })
 
 // for some reason this only updated likes before, maybe breaks something else? - TBD
-blogRouter.put('/:irequestd', async (request, response) => {
+blogRouter.put('/:id', async (request, response) => {
   const updatedBlog = await Blog.findByIdAndUpdate(request.params.id, request.body, { new: true })
   response.json(updatedBlog)
 })
