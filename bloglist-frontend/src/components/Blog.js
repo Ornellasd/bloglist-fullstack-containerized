@@ -135,7 +135,7 @@ const Blog = ({ loggedInUser, blogData }) => {
           >
             <ThumbUp />
           </IconButton>
-          <Typography>{blog.likes} likes</Typography>
+          <Typography>{blog.upvoters.length} likes</Typography>
           <IconButton
             onClick={() => handleDownvote()}
             color={
