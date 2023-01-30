@@ -24,9 +24,9 @@ import {
   ThumbDown
 } from '@material-ui/icons'
 
-// import { upvote, addComment, deleteBlog } from '../reducers/blogReducer'
+import { upvote, addComment, deleteBlog } from '../reducers/blogReducer'
 
-import { addComment, deleteBlog } from '../reducers/blogReducer'
+// import { addComment, deleteBlog } from '../reducers/blogReducer'
 
 
 const Blog = ({ loggedInUser, blogData }) => {
@@ -48,6 +48,8 @@ const Blog = ({ loggedInUser, blogData }) => {
       //   setIsDownvoted(true)
       //   setIsUpvoted(false)
     }
+
+    // console.log(blog, 'blergh')
   }, [blog])
 
   const handleDelete = () => {
@@ -73,11 +75,10 @@ const Blog = ({ loggedInUser, blogData }) => {
   const handleUpvote = () => {
     setIsDownvoted(false)
     setIsUpvoted(!isUpvoted)
+    dispatch(upvote(blog, loggedInUser))
   }
 
   const handleDownvote = () => {
-    console.log(blog, 'blergh')
-
     setIsUpvoted(false)
     setIsDownvoted(!isDownvoted)
   }
