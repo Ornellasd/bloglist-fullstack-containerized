@@ -21,12 +21,18 @@ import {
 import {
   Chat,
   ThumbUp,
+  ThumbDown
 } from '@material-ui/icons'
 
-import { upvote, addComment, deleteBlog } from '../reducers/blogReducer'
+// import { upvote, addComment, deleteBlog } from '../reducers/blogReducer'
+
+import { addComment, deleteBlog } from '../reducers/blogReducer'
+
 
 const Blog = ({ loggedInUser, blogData }) => {
   const [commentDialogOpen, setCommentDialogOpen] = useState(false)
+  const [isUpvoted, setIsUpvoted] = useState(false)
+  const [isDownvoted, setIsDownvoted] = useState(false)
 
   const id = useParams().id
   const dispatch = useDispatch()
@@ -52,6 +58,16 @@ const Blog = ({ loggedInUser, blogData }) => {
     dispatch(addComment(commentedBlog))
     event.target.comment.value = ''
     setCommentDialogOpen(false)
+  }
+
+  const handleUpvote = () => {
+    setIsDownvoted(false)
+    setIsUpvoted(!isUpvoted)
+  }
+
+  const handleDownvote = () => {
+    setIsUpvoted(false)
+    setIsDownvoted(!isDownvoted)
   }
 
   const dialog = () => (
@@ -98,16 +114,23 @@ const Blog = ({ loggedInUser, blogData }) => {
         <CardActions>
           <IconButton
             onClick={
-              () => dispatch(upvote(blog, loggedInUser))
+              () => handleUpvote()
             }
-            color={blog.upvoters.includes(loggedInUser.username)
-              ? 'primary'
-              : 'default'
+            color={
+              isUpvoted ? 'primary' : 'default'
             }
           >
             <ThumbUp />
           </IconButton>
           <Typography>{blog.likes} likes</Typography>
+          <IconButton
+            onClick={() => handleDownvote()}
+            color={
+              isDownvoted ? 'secondary' : 'default'
+            }
+          >
+            <ThumbDown />
+          </IconButton>
           <IconButton onClick={() => setCommentDialogOpen(true)}>
             <Chat />
           </IconButton>
@@ -124,7 +147,8 @@ const Blog = ({ loggedInUser, blogData }) => {
           }
         </CardActions>
       </Card>
-      {blog.comments.length > 0 &&
+      {
+        blog.comments.length > 0 &&
         <div>
           <Typography align="center" variant="h6">Comments</Typography>
           {blog.comments.map(comment =>
