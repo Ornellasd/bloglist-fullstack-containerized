@@ -1,4 +1,4 @@
-import { React, useState } from 'react'
+import { React, useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { useParams } from 'react-router'
 import { Link, useHistory } from 'react-router-dom'
@@ -40,6 +40,16 @@ const Blog = ({ loggedInUser, blogData }) => {
 
   const blog = blogData.blogs.find(b => b.id === id)
 
+  useEffect(() => {
+    if (blog.upvoters.includes(loggedInUser.username)) {
+      setIsUpvoted(true)
+      setIsDownvoted(false)
+      // } else if (blog.downvoters.includes(loggedInUser.username)) {
+      //   setIsDownvoted(true)
+      //   setIsUpvoted(false)
+    }
+  }, [blog])
+
   const handleDelete = () => {
     if (window.confirm(`Delete '${blog.title}' by ${blog.author}?`)) {
       dispatch(deleteBlog(blog))
@@ -66,6 +76,8 @@ const Blog = ({ loggedInUser, blogData }) => {
   }
 
   const handleDownvote = () => {
+    console.log(blog, 'blergh')
+
     setIsUpvoted(false)
     setIsDownvoted(!isDownvoted)
   }
