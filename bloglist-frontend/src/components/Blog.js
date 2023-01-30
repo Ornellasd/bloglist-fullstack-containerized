@@ -124,40 +124,45 @@ const Blog = ({ loggedInUser, blogData }) => {
             {blog.url}
           </Typography>
         </CardContent>
-        <CardActions>
-          <IconButton
-            onClick={
-              () => handleUpvote()
-            }
-            color={
-              isUpvoted ? 'primary' : 'default'
-            }
-          >
-            <ThumbUp />
-          </IconButton>
-          <Typography>{blog.upvoters.length} likes</Typography>
-          <IconButton
-            onClick={() => handleDownvote()}
-            color={
-              isDownvoted ? 'secondary' : 'default'
-            }
-          >
-            <ThumbDown />
-          </IconButton>
-          <IconButton onClick={() => setCommentDialogOpen(true)}>
-            <Chat />
-          </IconButton>
-          {(loggedInUser && loggedInUser.username === blog.user.username) &&
-            <Button
-              size="small"
-              color="secondary"
-              variant="contained"
-              style={{ marginLeft: 'auto' }}
-              onClick={() => handleDelete()}
+        <CardActions style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <div style={{ display: 'inherit', alignItems: 'center' }}>
+            <IconButton
+              onClick={
+                () => handleUpvote()
+              }
+              color={
+                isUpvoted ? 'primary' : 'default'
+              }
             >
-              Delete
-            </Button>
-          }
+              <ThumbUp />
+            </IconButton>
+            <Typography>{blog.upvoters.length}</Typography>
+            <IconButton
+              onClick={() => handleDownvote()}
+              color={
+                isDownvoted ? 'secondary' : 'default'
+              }
+            >
+              <ThumbDown />
+            </IconButton>
+          </div>
+
+          <div>
+            <IconButton onClick={() => setCommentDialogOpen(true)}>
+              <Chat />
+            </IconButton>
+            {(loggedInUser && loggedInUser.username === blog.user.username) &&
+              <Button
+                size="small"
+                color="secondary"
+                variant="contained"
+                onClick={() => handleDelete()}
+              >
+                Delete
+              </Button>
+            }
+          </div>
+
         </CardActions>
       </Card>
       {
