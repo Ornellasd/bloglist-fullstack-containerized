@@ -26,7 +26,7 @@ services:
     container_name: bloglist-backend-dev
 
   mongo:
-    image: mongo
+    image: mongo:4.4.6
     ports:
       - 3456:27017
     environment:
