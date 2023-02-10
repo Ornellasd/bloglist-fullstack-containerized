@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -157,10 +157,14 @@ const MenuDrawer = ({ user }) => {
   )
 }
 
-const Navbar = ({ currentUser, users }) => {
+const Navbar = ({ loggedInUser, users }) => {
   const dispatch = useDispatch()
   const classes = useStyles()
-  const user = currentUser && users.find(u => u.username === currentUser.username)
+  const [user, setUser] = useState(null)
+
+  useEffect(() => {
+    setUser(loggedInUser && users.find(u => u.username === loggedInUser.username))
+  }, [loggedInUser, users])
 
   return (
     <div className={classes.root}>
@@ -169,7 +173,7 @@ const Navbar = ({ currentUser, users }) => {
           <Typography variant="h5" className={classes.title}>
             Blog App
           </Typography>
-          {currentUser &&
+          {loggedInUser &&
             <>
               <div className={classes.navLinks}>
                 <Button color="inherit" component={Link} to="/blogs">Blogs</Button>
@@ -180,7 +184,7 @@ const Navbar = ({ currentUser, users }) => {
 
               <div className={classes.userCorner}>
                 <Typography className={classes.userCornerItem}>
-                  Hello, {user && user.username}
+                  {user && `Hello, ${user.username}`}
                 </Typography>
                 <Divider style={{ background: '#92C565' }} orientation="vertical" variant="middle" flexItem />
                 <Button color="inherit" component={Link} to={user && `/users/${user.id}`} >My Posts</Button>

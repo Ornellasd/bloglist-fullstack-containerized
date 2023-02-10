@@ -37,7 +37,7 @@ const App = () => {
   useEffect(() => {
     dispatch(getBlogs())
     dispatch(getUsers())
-  }, [dispatch])
+  }, [dispatch, loggedInUser])
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
@@ -52,7 +52,7 @@ const App = () => {
     <Container component="main" maxWidth="md">
       <CssBaseline />
       <Router>
-        <Navbar currentUser={loggedInUser} users={users} />
+        <Navbar loggedInUser={loggedInUser} users={users} />
         <Alerts alerts={alerts} />
 
         <Switch>
