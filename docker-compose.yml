@@ -5,7 +5,7 @@ services:
     image: bloglist-frontend
     build:
       context: ./bloglist-frontend/
-      dockerfile: Dockerfile
+      dockerfile: localhost-prod.Dockerfile
     volumes:
       - ./bloglist-frontend/:/usr/src/app
     ports:
